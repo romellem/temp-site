@@ -5,9 +5,22 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Document</title>
+	<style>
+		textarea {
+		  width: 100%;
+		  min-height: 60px;
+		}
+		.row {
+		  display: flex;
+		}
+
+		.row > * {
+		  flex: 1;
+		}
+	</style>
 </head>
 <body>
-	<textarea id="input" cols="80"></textarea>
+	<textarea id="input" cols="80"></textarea><br>
 	<button id="parse">Parse above zip input</button>
 	<hr>
 	<div style="display: flex">
@@ -19,7 +32,7 @@
 		let markdown_ele = document.getElementById('markdown');
 		let html_ele = document.getElementById('html');
 
-		parse_button.addEventListener(function(e) {
+		parse_button.addEventListener('click', function(e) {
 			let zip_input = document.getElementById('input');
 
 			if (!zip_input) return;
