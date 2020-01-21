@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<p>This is a plain image</p>
+	<img src="https://via.placeholder.com/50" class="first-image">
+
+	<p>This is a button that contains an image</p>
+	<button><img src="https://via.placeholder.com/50" class="second-image"></button>
+	<p>
+		<em>In Internet Explorer, if you <code>mouseover</code> the first image, you'll see a message logged in the console.
+		If you <code>mouseover</code> the second image within the button, no message will be logged.</em>
+	</p>
+
+	<script type="text/javascript">
+		var images = document.querySelectorAll('img');
+		for (var i = 0; i < images.length; i++) {
+			var image = images[i];
+			console.log('Adding a "mouseover" event to', image);
+			image.addEventListener('mouseover', function(e) {
+				console.log('Hovered!', e);
+			});
+		}
+	</script>
+</body>
+</html>
