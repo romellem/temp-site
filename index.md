@@ -3,6 +3,4 @@
 ---
 
 # Table of Contents
-{% for page in site.pages %}
-* [{{ page.url}}]({{ page.url }})
-{% endfor %}
+*  [ie/mouseover-within-button.html](ie/mouseover-within-button.html)
