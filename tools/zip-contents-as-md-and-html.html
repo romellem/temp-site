@@ -44,6 +44,8 @@
 				.split('\n')
 				.filter(line => !line.includes('(stored 0%)'))
 				.map(line => line.replace(/^\s*adding: build\//, '').replace(/ \(deflated \d+%\)$/, ''));
+			
+			parsed_lines.sort();
 
 			let html = parsed_lines.map(line => `<li>${line}</li>`);
 
