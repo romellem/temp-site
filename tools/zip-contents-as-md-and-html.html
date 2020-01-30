@@ -8,7 +8,7 @@
 	<style>
 		textarea {
 		  width: 100%;
-		  min-height: 60px;
+		  min-height: 80px;
 		}
 		.row {
 		  display: flex;
@@ -24,10 +24,25 @@
 	<button id="parse">Parse above zip input</button>
 	<hr>
 	<div class="row">
-		<div><p>Markdown:</p><textarea id="markdown"></textarea></div>
-		<div><p>HTML:</p><textarea id="html"></textarea></div>
+		<div>
+			<p>Markdown:</p>
+			<textarea id="markdown"></textarea>
+			<p><button data-clipboard-target="#markdown">Copy above MD</button></p>
+		</div>
+		<div>
+			<p>HTML:</p>
+			<textarea id="html"></textarea>
+			<p><button data-clipboard-target="#html">Copy above HTML</button></p>
+		</div>
 	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 	<script>
+		// Attach "copy to clipboard" listener
+		window.clipboard_js_instance = new ClipboardJS('[data-clipboard-target]');
+		window.clipboard_js_instance.on('success', function(e) {
+		    console.log('ClipboardJS', e);
+		});
+		
 		let parse_button = document.getElementById('parse');
 		let markdown_ele = document.getElementById('markdown');
 		let html_ele = document.getElementById('html');
