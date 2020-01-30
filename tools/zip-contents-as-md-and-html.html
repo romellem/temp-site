@@ -17,6 +17,11 @@
 		.row > * {
 		  flex: 1;
 		}
+		
+		.success::after {
+			content: ' \2713';
+			color: forestgreen ;
+		}
 	</style>
 </head>
 <body>
@@ -40,7 +45,10 @@
 		// Attach "copy to clipboard" listener
 		window.clipboard_js_instance = new ClipboardJS('[data-clipboard-target]');
 		window.clipboard_js_instance.on('success', function(e) {
-		    console.log('ClipboardJS', e);
+			// Show a check mark after copying
+			let button = e.trigger;
+			button.classList.add('success');
+			setTimeout(() => button.classList.remove('success'), 2000);
 		});
 		
 		let parse_button = document.getElementById('parse');
