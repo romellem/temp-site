@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Event Handler Properties vs DOM Level 2 Events (addEventListener)</title>
+    <style>
+        .flex {
+            display: flex;
+        }
+
+        .column {
+            border: 1px solid grey;
+            padding: 0.5em;
+        }
+
+        .column + .column {
+            margin-left: 0.5em;
+        }
+
+        #column-1-content p,
+        #column-2-content p {
+            background: lightpink;
+            font-weight: bold;
+            padding: 0.25em 0.5em;
+        }
+
+        pre {
+            background: gainsboro;
+            padding: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex">
+        <div class="column">
+            <h2>Column 1</h2>
+            <p>The button below has been setup with the following javascript:</p>
+            <pre><code class="language-javascript">var button1 = document.getElementById('column-1');
+var column1Content = document.getElementById('column-1-content');
+
+button1.onclick = function() {
+    count++;
+    var messageNode = document.createTextNode("First Message " + count);
+    var pTag = document.createElement('p');
+    pTag.appendChild(messageNode);
+    column1Content.appendChild(pTag);
+};
+button1.onclick = function() {
+    count++;
+    var messageNode = document.createTextNode("Second Message " + count);
+    var pTag = document.createElement('p');
+    pTag.appendChild(messageNode);
+    column1Content.appendChild(pTag);
+};</code></pre>
+            <button id="column-1">Run code for Column 1</button>
+            <hr>
+            <p><em>Column 1 Injected Content:</em></p>
+            <div id="column-1-content"></div>
+        </div>
+        <div class="column">
+            <h2>Column 2</h2>
+            <p>The button below has been setup with the following javascript:</p>
+            <pre><code class="language-javascript">var button2 = document.getElementById('column-2');
+var column2Content = document.getElementById('column-2-content');
+
+button2.addEventListener('click', function() {
+    count++;
+    var messageNode = document.createTextNode("First Message " + count);
+    var pTag = document.createElement('p');
+    pTag.appendChild(messageNode);
+    column2Content.appendChild(pTag);
+});
+button2.addEventListener('click', function() {
+    count++;
+    var messageNode = document.createTextNode("Second Message " + count);
+    var pTag = document.createElement('p');
+    pTag.appendChild(messageNode);
+    column2Content.appendChild(pTag);
+});</code></pre>
+            <button id="column-2">Run code for Column 2</button>
+            <hr>
+            <p><em>Column 2 Injected Content:</em></p>
+            <div id="column-2-content"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var count = 0;
+        var button1 = document.getElementById('column-1');
+        var button2 = document.getElementById('column-2');
+        var column1Content = document.getElementById('column-1-content');
+        var column2Content = document.getElementById('column-2-content');
+
+        button1.onclick = function() {
+            count++;
+            var messageNode = document.createTextNode("First Message " + count);
+            var pTag = document.createElement('p');
+            pTag.appendChild(messageNode);
+            column1Content.appendChild(pTag);
+        };
+        button1.onclick = function() {
+            count++;
+            var messageNode = document.createTextNode("Second Message " + count);
+            var pTag = document.createElement('p');
+            pTag.appendChild(messageNode);
+            column1Content.appendChild(pTag);
+        };
+
+        button2.addEventListener('click', function() {
+            count++;
+            var messageNode = document.createTextNode("First Message " + count);
+            var pTag = document.createElement('p');
+            pTag.appendChild(messageNode);
+            column2Content.appendChild(pTag);
+        });
+        button2.addEventListener('click', function() {
+            count++;
+            var messageNode = document.createTextNode("Second Message " + count);
+            var pTag = document.createElement('p');
+            pTag.appendChild(messageNode);
+            column2Content.appendChild(pTag);
+        });
+    </script>
+</body>
+</html>
