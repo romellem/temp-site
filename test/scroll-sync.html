@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Sync</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <style>
+@charset "UTF-8";
+button {
+  border-radius: 3px;
+  margin: 6px 3px;
+  cursor: pointer;
+}
+button:active {
+  color: darkblue;
+  outline: none;
+}
+
+[data-ssi] {
+  display: block;
+  position: relative;
+}
+[data-ssi]::after {
+  width: 100%;
+  height: 1px;
+  background: blue;
+  content: attr(data-ssi);
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 5px;
+  color: red;
+  font-size: 10px;
+  font-weight: normal;
+  line-height: 14px;
+}
+
+.col {
+  max-height: 130px;
+  overflow: auto;
+}
+
+.headers {
+  height: 70px;
+}
+
+.sticky {
+  position: fixed;
+  bottom: 0;
+  height: 200px;
+  box-shadow: 0 0 3px 1px rgba(100, 100, 100, 0.5);
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.two-col {
+  display: flex;
+}
+
+.col {
+  flex: 1;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+
+.keytruda li::before {
+  color: #48a548;
+}
+
+.lenvima li::before {
+  color: #ae1c63;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  position: relative;
+  padding-left: 1em;
+  list-style-type: none;
+}
+ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  display: block;
+}
+ul strong {
+  display: block;
+  padding-left: 1em;
+  margin-bottom: 4px;
+}
+ul li + li {
+  margin-top: 4px;
+}
+ul li + strong {
+  margin-top: 1em;
+}
+
+.header {
+  font-weight: bold;
+  padding-left: 1em;
+}
+.header.keytruda {
+  color: #48a548;
+}
+.header.lenvima {
+  color: #ae1c63;
+}
+    </style>
+</head>
+<body>
+    <button id="tick">Tick Smart Balance</button>  
+<div class="sticky">
+<div class="two-col headers">
+<div class="col"><p class="header keytruda">Selected Safety Information for <br>RUTREYDA® (dextafungemab)</p></div>
+<div class="col"><p class="header lenvima">Selected Safety Information for <br>VARONA® (cabogrosxipab)</p></div>
+</div>
+<div class="two-col">
+<div class="col keytruda-scrollable">
+
+<ul class="keytruda">
+<strong data-ssi="1">dolor commodo</strong>
+<li>sint veniam laborum deserunt ipsum id ad esse quis Lorem Lorem aute aute dolore fugiat tempor tempor mollit quis fugiat adipisicing consequat dolor ex dolore consectetur proident cillum ut veniam consectetur nisi consequat quis ea qui ullamco commodo id consequat dolore labore adipisicing ipsum tempor laboris deserunt dolor amet occaecat officia fugiat consectetur do laborum aliquip ipsum magna reprehenderit velit amet aute sint Lorem minim incididunt commodo nisi ullamco dolor commodo mollit Lorem exercitation adipisicing magna veniam mollit ex nulla amet cillum aute labore id dolore in laboris consectetur</li>
+<strong data-ssi="2">mollit culpa</strong>
+<li>dolore irure Lorem non qui et nulla velit est et ipsum nisi est ex consequat laboris commodo do sit anim ipsum amet veniam magna ad anim cillum minim commodo anim deserunt laboris mollit sit duis est sunt ut do commodo eiusmod eu in culpa dolore duis Lorem do nulla amet officia sit dolore</li>
+<strong data-ssi="3">nostrud sint</strong>
+<li>ipsum esse proident velit aute duis Lorem mollit nostrud ipsum aliqua elit reprehenderit sunt reprehenderit culpa qui quis ullamco consequat ullamco consequat id do sit reprehenderit sit est occaecat sint cillum officia nulla eu laboris commodo irure occaecat velit qui reprehenderit aliquip dolor eu est do pariatur do culpa labore</li>
+<strong data-ssi="4">velit dolor</strong>
+<li>mollit laboris qui laborum officia ipsum enim consequat nulla eiusmod occaecat ad dolor non ea exercitation veniam laboris nulla eiusmod tempor consectetur magna ullamco excepteur proident sunt qui aliquip aliquip irure non amet ex pariatur proident adipisicing sunt occaecat pariatur dolore ad ex reprehenderit ea sit non incididunt ad adipisicing tempor aute ullamco est exercitation tempor occaecat est ut irure ullamco esse aliqua voluptate sit incididunt consequat aliquip ullamco cupidatat adipisicing ipsum occaecat elit cupidatat elit commodo irure culpa eiusmod eiusmod nisi cillum veniam officia aute elit do ut sunt aliquip occaecat cillum mollit ad quis aliquip velit eu laboris quis culpa</li>
+<li data-ssi="5">et ea pariatur deserunt sit magna proident reprehenderit exercitation velit laboris excepteur aute sint cupidatat magna ad tempor proident pariatur ipsum eu consequat amet anim ullamco id enim quis anim cillum ad enim aliqua mollit duis pariatur amet aute pariatur commodo pariatur aliqua nisi nulla dolor ex id incididunt id ad Lorem culpa occaecat eiusmod ea adipisicing consequat ex minim incididunt est fugiat cupidatat enim proident excepteur reprehenderit labore culpa cillum amet nisi culpa cillum amet tempor aute et esse proident commodo ut cupidatat dolor do cupidatat cillum incididunt excepteur reprehenderit enim ea sunt quis ut Lorem mollit dolor excepteur</li>
+<strong data-ssi="6">dolor qui esse enim est</strong>
+<li>consectetur Lorem occaecat quis pariatur sunt do duis nisi in dolore Lorem veniam velit minim mollit consequat anim excepteur duis veniam exercitation Lorem mollit nulla incididunt esse et sunt cillum officia labore irure esse eu et commodo cillum reprehenderit labore amet enim enim excepteur ut veniam aliqua irure sit aute elit exercitation</li>
+<strong data-ssi="7">sit enim ea</strong>
+<li>cillum magna exercitation consectetur reprehenderit commodo amet ea enim deserunt ipsum eu cillum ullamco cillum nostrud est aliquip eu do sint eu nulla in nostrud cillum laborum duis do non reprehenderit in veniam deserunt eiusmod voluptate mollit ipsum adipisicing ut enim labore irure consectetur labore aliquip Lorem enim occaecat ipsum ipsum eiusmod sit ullamco incididunt ipsum consectetur anim ipsum anim enim exercitation dolor proident non pariatur eu mollit id veniam fugiat magna Lorem tempor sunt eiusmod</li>
+<strong data-ssi="8">qui magna occaecat non</strong>
+<li>sit mollit duis consectetur anim dolor velit proident elit incididunt officia nostrud dolor incididunt nulla ea consequat voluptate eiusmod nisi irure dolore est incididunt non eiusmod cillum commodo proident quis elit magna elit minim Lorem tempor ullamco enim in dolor ea deserunt ipsum cupidatat aute sint cillum duis cupidatat reprehenderit sit cupidatat elit qui adipisicing excepteur voluptate aute officia cupidatat exercitation minim deserunt amet labore elit in ex amet tempor ullamco deserunt non enim aliqua qui voluptate esse tempor excepteur cillum magna voluptate pariatur consequat eu id duis fugiat fugiat minim ipsum officia amet ad labore laboris ea sit quis ea elit voluptate anim duis irure culpa commodo qui eu reprehenderit Lorem esse irure ea duis adipisicing eu ad exercitation ullamco ipsum in ad proident nisi aliqua aliqua aliqua Lorem duis ad sit labore occaecat culpa est et</li>
+<li data-ssi="9">proident sint aliquip fugiat reprehenderit excepteur ad deserunt consectetur enim laboris laborum mollit esse do eiusmod dolore eiusmod eu eu enim pariatur duis ea cillum velit consequat ullamco voluptate voluptate incididunt quis enim non aliqua ea aliqua minim deserunt exercitation sit occaecat non laborum id ipsum laboris cupidatat aute anim proident</li>
+<li>deserunt velit pariatur fugiat exercitation esse non reprehenderit quis dolor Lorem deserunt ipsum proident nostrud reprehenderit esse tempor id laboris sunt veniam elit pariatur deserunt labore dolor veniam commodo</li>
+<strong data-ssi="10">proident velit</strong>
+<li>est velit officia ad incididunt sint exercitation consequat voluptate cupidatat pariatur ad consequat qui nulla est sunt irure adipisicing sint magna ut voluptate quis aliquip ullamco velit incididunt consectetur ad proident proident velit occaecat officia voluptate veniam laboris laboris dolor ullamco sit</li>
+<strong data-ssi="11">eiusmod nostrud fugiat anim incididunt laborum amet cupidatat</strong>
+<li>nostrud irure veniam sint deserunt eu ut ex consectetur occaecat nostrud pariatur incididunt veniam duis velit occaecat amet minim exercitation ut labore culpa duis nostrud nulla in enim consectetur veniam consectetur reprehenderit velit veniam et ipsum enim labore eiusmod pariatur elit eu labore cillum ut culpa officia sit deserunt</li>
+<li data-ssi="12">culpa est voluptate ea nulla nostrud non ad in est enim ut non deserunt laborum exercitation veniam adipisicing magna quis reprehenderit do labore laboris qui ut amet anim consectetur eu irure dolor Lorem do consequat ipsum dolore magna Lorem ea eiusmod officia eu aute velit consequat occaecat exercitation qui aliqua</li>
+<strong data-ssi="13">reprehenderit aliqua duis exercitation magna laboris et</strong>
+<li>labore ad sint enim Lorem ea dolor cupidatat eiusmod commodo dolore irure ad aliquip est esse fugiat cillum ad sit magna non eu mollit elit aliqua proident qui labore deserunt dolore amet esse aute elit occaecat elit mollit non velit incididunt sint</li>
+<strong data-ssi="14">id nisi</strong>
+<li>ex ex anim nulla est incididunt aliqua sunt non fugiat et dolor proident culpa labore pariatur quis ut eiusmod dolore deserunt consectetur magna anim tempor mollit proident esse cupidatat aliqua aute dolore laboris et est minim incididunt aliquip dolor duis ipsum dolor ex eiusmod eu ipsum qui laborum tempor aliqua qui nulla</li>
+<strong data-ssi="15">non occaecat</strong>
+<li>ut voluptate fugiat consequat labore adipisicing consequat dolor dolore laborum non do dolore excepteur adipisicing excepteur eu cillum sint ex pariatur aute occaecat aliquip dolor consequat eiusmod mollit nostrud elit eiusmod fugiat laboris laboris aliqua ullamco minim enim exercitation qui velit nostrud ipsum nulla non pariatur duis proident non enim pariatur laborum minim Lorem est veniam eiusmod eiusmod laboris nostrud officia adipisicing qui</li>
+<li data-ssi="16">ex aute et do enim consequat esse esse ut labore duis laboris exercitation et adipisicing commodo nulla ex anim aliqua aute ut occaecat duis excepteur anim ullamco esse amet ut cupidatat cupidatat sit nulla aliqua commodo labore</li>
+<li>consectetur non proident in aliquip velit nostrud nulla ipsum deserunt tempor ut laborum deserunt cillum officia eu sint anim culpa eiusmod tempor adipisicing cillum incididunt qui proident aliqua non sint mollit aute aliquip ut duis Lorem aliquip dolore mollit aute nostrud sunt Lorem quis elit fugiat consequat quis do reprehenderit aute irure velit non non cupidatat et minim velit dolor anim tempor irure magna exercitation dolore ut consectetur</li>
+<strong data-ssi="17">nisi</strong>
+<li>nostrud eiusmod proident elit elit incididunt magna fugiat aute voluptate esse nostrud sint velit anim duis cillum nisi consectetur nulla sint duis ut laboris velit laborum</li>
+</ul><br>
+
+</div>
+<div class="col lenvima-scrollable">
+
+<ul class="lenvima">
+<strong data-ssi="1">veniam</strong>
+<li>officia cillum mollit fugiat ad exercitation Lorem voluptate amet labore nisi qui quis et consectetur amet deserunt exercitation Lorem eu in Lorem labore adipisicing exercitation ipsum ex consequat commodo anim voluptate ipsum eiusmod cupidatat ea reprehenderit Lorem id pariatur labore eu dolor ut nisi excepteur eu laborum eu laborum excepteur exercitation elit sit deserunt nulla proident in in ex aliqua nisi aute minim ut do elit ut occaecat Lorem laborum tempor officia aliqua ea do fugiat</li>
+<li data-ssi="2">commodo proident eiusmod culpa ea minim officia aliquip veniam est duis laborum tempor deserunt anim nostrud aute anim eu et est nulla esse exercitation amet labore tempor non officia nulla fugiat aliquip labore eiusmod commodo cupidatat in aute ipsum mollit minim laboris consectetur incididunt nostrud fugiat consequat do ipsum culpa et pariatur id ex</li>
+<strong data-ssi="3">dolor exercitation</strong>
+<li>culpa aliqua nisi dolor mollit enim occaecat consectetur nulla irure do cupidatat elit in voluptate ullamco esse ullamco veniam quis adipisicing anim cupidatat sint dolore amet aliqua Lorem labore adipisicing fugiat aliquip laboris incididunt ex veniam aliquip enim est sit adipisicing commodo dolor aliquip minim eu ad ullamco deserunt ipsum officia eu laborum eiusmod excepteur</li>
+<strong data-ssi="4">incididunt non exercitation</strong>
+<li>irure mollit voluptate anim officia Lorem consequat labore laboris aute labore fugiat duis proident consequat dolor cupidatat sit cupidatat voluptate in ut nulla in labore ea nostrud do in et non occaecat nulla irure sunt duis minim nostrud excepteur ipsum fugiat pariatur occaecat in enim non exercitation laboris veniam laboris occaecat elit reprehenderit magna anim irure excepteur reprehenderit qui pariatur in non irure in adipisicing occaecat dolore pariatur aliqua aliquip laborum mollit adipisicing irure voluptate tempor eu minim qui aliqua consequat</li>
+<strong data-ssi="5">cupidatat</strong>
+<li>consectetur ut sunt occaecat do reprehenderit deserunt laboris anim est non duis voluptate pariatur culpa aute ipsum qui incididunt aliqua cupidatat et enim deserunt ipsum qui laborum dolore fugiat esse eiusmod duis mollit enim velit laboris proident tempor velit in commodo pariatur elit non officia laboris Lorem nostrud sunt qui eiusmod sint cupidatat laborum ut tempor culpa culpa anim ut consectetur elit minim velit esse consectetur aute fugiat amet est aliqua excepteur id ut laborum</li>
+<li data-ssi="6">proident incididunt sint mollit cupidatat cillum cillum exercitation aute sunt proident Lorem magna nulla veniam culpa duis ad nulla consectetur culpa deserunt eiusmod veniam elit ullamco irure irure proident tempor dolore adipisicing nostrud culpa laboris sit velit ea aute exercitation ullamco aliqua aliqua exercitation est minim veniam pariatur excepteur</li>
+<strong data-ssi="7">laboris dolor labore amet</strong>
+<li>culpa officia adipisicing nulla labore ullamco ad Lorem cillum nulla veniam labore officia esse ut et Lorem dolore voluptate ut culpa veniam enim cupidatat elit aliquip tempor duis nisi anim occaecat non officia labore deserunt ex magna quis do dolor aute officia velit cillum laboris velit nulla consequat duis sint proident dolore id cillum deserunt incididunt labore in deserunt aliqua consequat anim qui exercitation in id voluptate Lorem magna proident exercitation velit</li>
+<li data-ssi="8">velit pariatur ut sit quis elit nulla do exercitation ex occaecat nulla pariatur eiusmod fugiat voluptate anim quis ex amet culpa officia do velit elit nulla</li>
+<strong data-ssi="9">ipsum</strong>
+<li>qui in ex nostrud esse culpa Lorem ad Lorem ipsum minim anim mollit pariatur ullamco eiusmod adipisicing duis sunt do minim sunt labore labore elit pariatur enim cillum excepteur id non elit adipisicing et proident nostrud tempor consectetur exercitation dolore labore dolor aliqua cillum non veniam sunt elit consequat cupidatat consectetur excepteur deserunt cillum mollit ipsum incididunt aliqua enim irure cillum elit in officia et ad proident anim esse consequat sit nisi fugiat sit pariatur anim sunt ad pariatur</li>
+<strong data-ssi="10">ea</strong>
+<li>laborum incididunt velit ex adipisicing officia quis occaecat sunt laboris aute officia exercitation consequat aliqua pariatur minim esse laboris aliqua et cupidatat eiusmod laboris sit ut ex dolor ad irure do exercitation sint laborum eu non velit officia ad sit minim ipsum nostrud culpa tempor reprehenderit sit et deserunt et deserunt et irure nostrud officia occaecat sunt veniam voluptate ullamco in tempor commodo eiusmod</li>
+<strong data-ssi="11">pariatur laborum elit consectetur veniam</strong>
+<li>est cillum sunt amet velit consectetur nulla dolore laboris consectetur nisi culpa velit eiusmod ut consequat sit Lorem do consectetur nulla qui ad do elit in officia magna aute aute pariatur voluptate labore aute ipsum in cillum est</li>
+<strong data-ssi="12">eiusmod officia pariatur</strong>
+<li>eiusmod cillum cupidatat commodo proident qui ea laborum velit id officia ex et minim nulla nulla velit et ullamco magna pariatur nostrud eiusmod dolore irure duis elit qui eu sunt sit magna duis ut officia ut enim pariatur in nisi ex occaecat amet ad labore esse id id id ullamco enim cillum est eiusmod sint eiusmod ex dolore consequat officia eiusmod dolore commodo cupidatat tempor consectetur amet sint</li>
+<li data-ssi="13">qui ipsum excepteur consequat cupidatat nulla quis incididunt aliquip officia quis ex in voluptate ex culpa sunt reprehenderit sint dolor qui magna sit do consequat ex adipisicing voluptate magna occaecat veniam velit aliquip ullamco adipisicing consequat ullamco cillum reprehenderit eiusmod veniam officia non est sunt ex exercitation nulla sunt et elit irure eu</li>
+<strong data-ssi="14">nulla</strong>
+<li>eu dolore cillum officia sunt non et deserunt dolor commodo eiusmod aute ullamco laboris proident nulla est irure voluptate ex irure ullamco in exercitation mollit cillum incididunt pariatur adipisicing exercitation adipisicing consectetur duis duis cupidatat ullamco esse anim aute esse minim ea voluptate pariatur cupidatat anim qui cillum consequat amet et et voluptate et laboris ex Lorem exercitation dolor occaecat reprehenderit labore eiusmod deserunt do elit eu ad consectetur irure ut do commodo excepteur sit sit elit anim laborum duis officia ea</li>
+<strong data-ssi="15">dolor nulla laboris nisi est</strong>
+<li>exercitation aliquip sint labore id occaecat in qui culpa cillum reprehenderit Lorem est anim magna non aliquip Lorem exercitation ipsum tempor irure ex veniam adipisicing duis pariatur anim culpa elit mollit id proident magna dolor labore sit officia magna excepteur do ad</li>
+<strong data-ssi="16">duis quis</strong>
+<li>ut excepteur laboris reprehenderit velit excepteur cupidatat do est et aliqua reprehenderit consequat culpa cupidatat tempor proident Lorem ut est nostrud nulla culpa eu exercitation ullamco sint amet ex in elit ea do non cillum sint quis velit ad officia consectetur dolore laborum qui excepteur ex reprehenderit duis velit ullamco mollit voluptate nisi duis in ut et pariatur id aute aliqua nisi ut irure duis labore veniam laborum veniam consectetur culpa quis eiusmod ea proident ut ullamco eu Lorem quis ex esse velit eu tempor tempor ullamco ad do ipsum tempor nulla esse minim anim non ea exercitation sit adipisicing veniam reprehenderit ut cillum qui amet voluptate fugiat cillum magna laborum cillum mollit duis cupidatat elit dolor sunt amet cillum sunt magna laborum commodo aliquip cupidatat enim mollit sit velit enim deserunt enim Lorem in consequat deserunt do pariatur id eiusmod consectetur fugiat enim culpa do id quis occaecat nisi anim ullamco exercitation minim ea aute et cupidatat amet irure sunt cillum voluptate labore sunt id ipsum incididunt ut esse cupidatat fugiat nulla consectetur dolore voluptate labore velit dolor reprehenderit</li>
+<li data-ssi="17">cupidatat labore mollit proident commodo laborum ad amet eu cillum laborum adipisicing incididunt excepteur do anim aliquip adipisicing adipisicing nulla et incididunt aliqua laborum reprehenderit irure et velit ex ipsum nulla nostrud ipsum anim anim</li>
+<strong data-ssi="18">voluptate elit sunt labore laborum excepteur Lorem</strong>
+<li>dolor ea dolore consequat pariatur fugiat fugiat minim veniam ea enim mollit consequat ex do aliquip velit est ad fugiat esse ullamco in exercitation laborum cupidatat irure adipisicing velit sint nisi reprehenderit veniam commodo exercitation in dolor aliqua sint sunt dolor non incididunt nisi voluptate occaecat qui magna minim ea ullamco cupidatat proident occaecat consequat ut ex minim tempor in dolore do velit adipisicing ut commodo ex tempor labore elit aliquip excepteur Lorem aliqua nulla consequat elit aute tempor ullamco ad ad officia qui et ea id est eiusmod magna cupidatat duis culpa officia duis proident</li>
+<li data-ssi="19">aute velit voluptate cillum nostrud exercitation sint officia id consequat aliqua sunt non quis nulla cupidatat duis consectetur qui</li>
+<strong data-ssi="20">consequat laborum cupidatat</strong>
+<li>consectetur incididunt Lorem irure nulla ut consectetur voluptate ea amet duis velit in sit sunt cillum qui irure Lorem sit non irure fugiat consectetur aliquip non deserunt ullamco excepteur esse ipsum commodo officia quis officia ipsum voluptate duis veniam laborum ex tempor elit qui voluptate proident irure anim occaecat ipsum duis et eu aute</li>
+<strong data-ssi="21">deserunt et</strong>
+<li>consectetur consequat nostrud est ullamco dolore do commodo aute enim minim mollit occaecat laboris ut occaecat exercitation reprehenderit incididunt commodo aute esse in duis culpa laboris ipsum anim deserunt quis labore excepteur minim exercitation nisi velit ex fugiat anim minim laboris incididunt irure id adipisicing quis consectetur reprehenderit pariatur sint dolor veniam quis cupidatat irure sint ea ex proident eu Lorem cupidatat anim aute laboris non excepteur nisi duis excepteur sint nostrud et occaecat duis et labore elit quis dolore Lorem fugiat officia</li>
+<strong data-ssi="22">ullamco ad</strong>
+<li>pariatur pariatur ex minim cupidatat sint ullamco sit eiusmod mollit proident labore exercitation aliquip veniam mollit adipisicing mollit reprehenderit esse ex officia duis et sit eu esse ad nulla laborum aute mollit pariatur incididunt id amet non incididunt adipisicing velit exercitation consectetur amet incididunt officia labore amet nisi non mollit labore sunt excepteur excepteur culpa commodo laborum sit deserunt dolore sit duis cillum qui qui do tempor</li>
+<li data-ssi="23">tempor aliqua eiusmod aliqua ex cupidatat velit ad mollit mollit exercitation aliquip in sunt reprehenderit amet sint cupidatat commodo magna consectetur anim irure culpa eiusmod ipsum incididunt esse deserunt duis laboris sunt veniam consequat ut quis nulla deserunt dolore duis consectetur officia proident consectetur sit reprehenderit culpa dolor consectetur velit tempor sunt minim sunt enim culpa eu anim elit quis voluptate excepteur reprehenderit mollit fugiat sint magna veniam irure consequat nulla</li>
+<li>nostrud aute esse do quis magna laboris reprehenderit occaecat commodo ut fugiat qui id irure eu do sint mollit aliqua excepteur ea</li>
+<li data-ssi="24">dolor et nostrud sunt nostrud qui dolore cupidatat elit non et magna dolor culpa exercitation non occaecat magna dolor labore proident nisi id et duis anim cupidatat excepteur dolore magna tempor ea nulla sit veniam commodo mollit aute commodo dolore laboris do ut anim magna sit sunt aute labore ipsum</li>
+<li>in ullamco aliqua reprehenderit voluptate quis excepteur dolor anim culpa esse aute ipsum sunt Lorem commodo tempor enim ullamco consequat aliqua elit aliquip tempor cupidatat deserunt non incididunt quis duis est incididunt eiusmod ut culpa elit officia reprehenderit eiusmod laborum sit</li>
+<strong data-ssi="25">consequat id id quis</strong>
+<li>mollit exercitation sunt sit elit esse ad ut non incididunt ut duis laborum nisi et mollit tempor occaecat aute consequat officia proident occaecat elit eiusmod qui nulla cupidatat cupidatat officia amet nisi proident occaecat cupidatat ipsum irure laborum</li>
+<li data-ssi="26">excepteur adipisicing aliquip irure eiusmod commodo amet proident et deserunt excepteur nisi nisi commodo enim adipisicing excepteur labore eu nulla excepteur officia ipsum est dolor dolore eu sint tempor laboris ullamco nisi nulla deserunt mollit elit excepteur consequat irure voluptate voluptate magna velit elit officia sunt ut esse amet nulla fugiat proident aliqua eiusmod dolor magna veniam minim proident cillum irure ullamco pariatur eu esse quis elit qui velit cillum sint culpa deserunt officia laboris sint occaecat et exercitation reprehenderit elit eiusmod pariatur do eiusmod incididunt ex adipisicing nostrud sint reprehenderit culpa incididunt ullamco laborum ad adipisicing nisi in exercitation aliquip dolor nostrud do ea veniam sint amet culpa irure eu cillum dolore id</li>
+<li>esse Lorem dolore irure minim voluptate aliqua et nulla aliquip commodo elit velit nisi veniam ad ut voluptate deserunt et dolor sunt minim est labore ex minim proident culpa duis quis eu nostrud sit sit qui labore nulla tempor minim do id excepteur elit veniam excepteur minim sunt fugiat sit</li>
+</ul><br>
+
+</div>
+</div>
+</div>
+    <script>
+        "use strict";
+        
+        function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+        
+        function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+        
+        function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+        
+        function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+        
+        function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+        
+        function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+        
+        // Good enough for iOS, which is what we are targetting
+        var IS_TOUCH_DEVICE = ('ontouchstart' in window);
+        var button = document.getElementById('tick');
+        var keytruda_ssi = 1;
+        var lenvima_ssi = 1;
+        var keytruda_breakpoints = document.querySelectorAll('.keytruda [data-ssi]');
+        var lenvima_breakpoints = document.querySelectorAll('.lenvima [data-ssi]');
+        
+        var max_keytruda_ssi = _toConsumableArray(keytruda_breakpoints).reduce(function (acc, li) {
+          return parseInt(li.getAttribute('data-ssi'), 10);
+        }, 0);
+        
+        var max_lenvima_ssi = _toConsumableArray(lenvima_breakpoints).reduce(function (acc, li) {
+          return parseInt(li.getAttribute('data-ssi'), 10);
+        }, 0);
+        
+        var keytruda_scrollable = document.querySelector('.keytruda-scrollable');
+        keytruda_scrollable.previousScrollTop = 0;
+        var lenvima_scrollable = document.querySelector('.lenvima-scrollable');
+        lenvima_scrollable.previousScrollTop = 0;
+        
+        var increment = function increment() {
+          keytruda_ssi++;
+          lenvima_ssi++;
+          if (keytruda_ssi > max_keytruda_ssi) keytruda_ssi = 1;
+          if (lenvima_ssi > max_lenvima_ssi) lenvima_ssi = 1;
+        };
+        
+        button.addEventListener('click', function (e) {
+          var _document$querySelect, _document$querySelect2;
+        
+          increment();
+          (_document$querySelect = document.querySelector(".keytruda [data-ssi=\"".concat(keytruda_ssi, "\"]"))) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.scrollIntoView();
+          (_document$querySelect2 = document.querySelector(".lenvima [data-ssi=\"".concat(lenvima_ssi, "\"]"))) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.scrollIntoView();
+        });
+        var hover_on_event = IS_TOUCH_DEVICE ? 'touchstart' : 'mouseenter';
+        var hover_off_event = IS_TOUCH_DEVICE ? 'touchend' : 'mouseleave';
+        
+        var syncElements = function syncElements(thisElement, otherElement) {
+          var thisElementScrollHandler = function thisElementScrollHandler(e) {
+            // console.log("Syncing...");
+            var current_position = this.scrollTop;
+            var amount_scrolled_by = current_position - this.previousScrollTop;
+            this.previousScrollTop = current_position;
+            var otherPreviousScrollTop = otherElement.scrollTop; // otherElement.scrollBy(0, amount_scrolled_by);
+        
+            otherElement.scrollTop += amount_scrolled_by;
+            var other_scrolled_by = otherElement.scrollTop - otherPreviousScrollTop;
+        
+            if (amount_scrolled_by !== other_scrolled_by) {
+              console.log('Unequal scroll amounts!');
+              console.log("This scrolled by ".concat(amount_scrolled_by, ", other scrolled by ").concat(otherElement.scrollTop - otherPreviousScrollTop));
+              var difference = amount_scrolled_by - other_scrolled_by;
+              otherElement.scrollTop += difference;
+            }
+          };
+        
+          var turnOnSync = function turnOnSync(e) {
+            console.log("Sync'd!");
+            this.previousScrollTop = this.scrollTop;
+            this.addEventListener('scroll', thisElementScrollHandler);
+          };
+        
+          var turnOffSync = function turnOffSync(e) {
+            console.log("Unsync'd!");
+            this.previousScrollTop = this.scrollTop;
+            this.removeEventListener('scroll', thisElementScrollHandler);
+          };
+        
+          thisElement.addEventListener(hover_on_event, turnOnSync);
+          thisElement.addEventListener(hover_off_event, turnOffSync); // return turnOffSync.bind(thisElement);
+        };
+        
+        syncElements(keytruda_scrollable, lenvima_scrollable);
+        syncElements(lenvima_scrollable, keytruda_scrollable);
+        </script>
+</body>
+</html>
