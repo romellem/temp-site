@@ -39,7 +39,9 @@ $total-height: 200px;
 
 .col {
   max-height: $total-height - $header-height;
-  overflow: auto;
+	
+	// Columns scroll via Impulsion onUpdate
+  overflow: hidden;
 }
 
 .headers {
