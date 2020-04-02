@@ -38,8 +38,7 @@ button:active {
 
 .col {
   max-height: 130px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .headers {
@@ -51,7 +50,6 @@ button:active {
   bottom: 0;
   height: 200px;
   box-shadow: 0 0 3px 1px rgba(100, 100, 100, 0.5);
-  border-bottom: 40px solid black;
 }
 
 html {
@@ -59,11 +57,13 @@ html {
 }
 
 .two-col {
+  display: -webkit-box;
   display: flex;
 }
 
 .col {
-  flex: 1;
+  -webkit-box-flex: 1;
+          flex: 1;
   margin-left: 0.5em;
   margin-right: 0.5em;
 }
@@ -215,96 +215,56 @@ ul li + strong {
 </div>
 </div>
 </div>
+    <script src="https://unpkg.com/impulsion@1.0.1/dist/impulsion.js"></script>
     <script>
-        "use strict";
-        
-        function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-        
-        function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-        
-        function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-        
-        function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-        
-        function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-        
-        function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-        
         // Good enough for iOS, which is what we are targetting
-        var IS_TOUCH_DEVICE = ('ontouchstart' in window);
-        var button = document.getElementById('tick');
-        var keytruda_ssi = 1;
-        var lenvima_ssi = 1;
-        var keytruda_breakpoints = document.querySelectorAll('.keytruda [data-ssi]');
-        var lenvima_breakpoints = document.querySelectorAll('.lenvima [data-ssi]');
-        
-        var max_keytruda_ssi = _toConsumableArray(keytruda_breakpoints).reduce(function (acc, li) {
-          return parseInt(li.getAttribute('data-ssi'), 10);
-        }, 0);
-        
-        var max_lenvima_ssi = _toConsumableArray(lenvima_breakpoints).reduce(function (acc, li) {
-          return parseInt(li.getAttribute('data-ssi'), 10);
-        }, 0);
-        
-        var keytruda_scrollable = document.querySelector('.keytruda-scrollable');
+        const IS_TOUCH_DEVICE = 'ontouchstart' in window;
+
+        let button = document.getElementById('tick');
+        let keytruda_ssi = 1;
+        let lenvima_ssi = 1;
+
+        let keytruda_breakpoints = document.querySelectorAll('.keytruda [data-ssi]');
+        let lenvima_breakpoints = document.querySelectorAll('.lenvima [data-ssi]');
+        let max_keytruda_ssi = [...keytruda_breakpoints].reduce((acc, li) => parseInt(li.getAttribute('data-ssi'), 10), 0);
+        let max_lenvima_ssi = [...lenvima_breakpoints].reduce((acc, li) => parseInt(li.getAttribute('data-ssi'), 10), 0);
+
+        let keytruda_scrollable = document.querySelector('.keytruda-scrollable');
         keytruda_scrollable.previousScrollTop = 0;
-        var lenvima_scrollable = document.querySelector('.lenvima-scrollable');
+        let lenvima_scrollable = document.querySelector('.lenvima-scrollable');
         lenvima_scrollable.previousScrollTop = 0;
-        
-        var increment = function increment() {
+
+        const increment = () => {
           keytruda_ssi++;
           lenvima_ssi++;
           if (keytruda_ssi > max_keytruda_ssi) keytruda_ssi = 1;
           if (lenvima_ssi > max_lenvima_ssi) lenvima_ssi = 1;
         };
-        
-        button.addEventListener('click', function (e) {
-          var _document$querySelect, _document$querySelect2;
-        
+
+        button.addEventListener('click', e => {var _document$querySelect, _document$querySelect2;
           increment();
-          (_document$querySelect = document.querySelector(".keytruda [data-ssi=\"".concat(keytruda_ssi, "\"]"))) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.scrollIntoView();
-          (_document$querySelect2 = document.querySelector(".lenvima [data-ssi=\"".concat(lenvima_ssi, "\"]"))) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.scrollIntoView();
+
+          (_document$querySelect = document.querySelector(`.keytruda [data-ssi="${keytruda_ssi}"]`)) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.scrollIntoView();
+          (_document$querySelect2 = document.querySelector(`.lenvima [data-ssi="${lenvima_ssi}"]`)) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.scrollIntoView();
         });
-        var hover_on_event = IS_TOUCH_DEVICE ? 'touchstart' : 'mouseenter';
-        var hover_off_event = IS_TOUCH_DEVICE ? 'touchend' : 'mouseleave';
-        
-        var syncElements = function syncElements(thisElement, otherElement) {
-          var thisElementScrollHandler = function thisElementScrollHandler(e) {
-            // console.log("Syncing...");
-            var current_position = this.scrollTop;
-            var amount_scrolled_by = current_position - this.previousScrollTop;
-            this.previousScrollTop = current_position;
-            var otherPreviousScrollTop = otherElement.scrollTop; // otherElement.scrollBy(0, amount_scrolled_by);
-        
-            otherElement.scrollTop += amount_scrolled_by;
-            var other_scrolled_by = otherElement.scrollTop - otherPreviousScrollTop;
-        
-            if (amount_scrolled_by !== other_scrolled_by) {
-              console.log('Unequal scroll amounts!');
-              console.log("This scrolled by ".concat(amount_scrolled_by, ", other scrolled by ").concat(otherElement.scrollTop - otherPreviousScrollTop));
-              var difference = amount_scrolled_by - other_scrolled_by;
-              otherElement.scrollTop += difference;
+
+        let sticky = document.querySelector('.sticky');
+        let testScroll = new Impulsion({
+          source: sticky,
+          onUpdate(x, y, px, py) {
+            if (py == null) {
+              keytruda_scrollable.scrollBy(0, -y);
+              lenvima_scrollable.scrollBy(0, -y);
+            } else {
+              let dy = y - py;
+              keytruda_scrollable.scrollBy(0, -dy);
+              lenvima_scrollable.scrollBy(0, -dy);
             }
-          };
-        
-          var turnOnSync = function turnOnSync(e) {
-            console.log("Sync'd!");
-            this.previousScrollTop = this.scrollTop;
-            this.addEventListener('scroll', thisElementScrollHandler);
-          };
-        
-          var turnOffSync = function turnOffSync(e) {
-            console.log("Unsync'd!");
-            this.previousScrollTop = this.scrollTop;
-            this.removeEventListener('scroll', thisElementScrollHandler);
-          };
-        
-          thisElement.addEventListener(hover_on_event, turnOnSync);
-          thisElement.addEventListener(hover_off_event, turnOffSync); // return turnOffSync.bind(thisElement);
-        };
-        
-        syncElements(keytruda_scrollable, lenvima_scrollable);
-        syncElements(lenvima_scrollable, keytruda_scrollable);
+          },
+          // Reset values back to 0 when we are done scrolling
+          onEndDecelerating() {
+            testScroll.setValues(0, 0, null, null);
+          } });
         </script>
 </body>
 </html>
