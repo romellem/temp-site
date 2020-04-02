@@ -1,0 +1,126 @@
+
+
+// Misc styles
+
+button {
+  border-radius: 3px;
+  margin: 6px 3px;
+  cursor: pointer;
+  
+  &:active {
+    color: darkblue;
+    outline: none;
+  }
+}
+
+[data-ssi] {
+  display: block;
+  position: relative;
+
+  &::after {
+    width: 100%;
+    height: 1px;
+    background: blue;
+    content: attr(data-ssi);
+    // content: "hi";
+    // content: attr(data-height);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    color: red;
+    font-size: 10px;
+    font-weight: normal;
+    line-height: 14px;
+  }
+}
+$header-height: 70px;
+$total-height: 200px;
+
+.col {
+  max-height: $total-height - $header-height;
+  overflow: auto;
+}
+
+.headers {
+  height: $header-height;
+}
+
+.sticky {
+  position: fixed;
+  bottom: 0;
+  height: $total-height;
+
+  box-shadow: 0 0 3px 1px rgba(100, 100, 100, 0.5);
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.two-col {
+  display: flex;
+}
+
+.col {
+  flex: 1;
+
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+
+.keytruda li::before {
+  color: #48a548;
+}
+
+.lenvima li::before {
+  color: rgb(174, 28, 99);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+
+  // list-style: none;
+
+  li {
+    position: relative;
+    padding-left: 1em;
+    list-style-type: none;
+  }
+
+  li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    display: block;
+  }
+
+  strong {
+    display: block;
+
+    padding-left: 1em;
+    margin-bottom: 4px;
+  }
+
+  li + li {
+    margin-top: 4px;
+  }
+  li + strong {
+    margin-top: 1em;
+  }
+}
+
+.header {
+  font-weight: bold;
+
+  padding-left: 1em;
+
+  &.keytruda {
+    color: #48a548;
+  }
+
+  &.lenvima {
+    color: rgb(174, 28, 99);
+  }
+}
