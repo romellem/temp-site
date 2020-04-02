@@ -29,46 +29,21 @@ button.addEventListener('click', e => {
   document.querySelector(`.lenvima [data-ssi="${lenvima_ssi}"]`)?.scrollIntoView();
 });
 
-let hover_on_event = IS_TOUCH_DEVICE ? 'touchstart' : 'mouseenter';
-let hover_off_event = IS_TOUCH_DEVICE ? 'touchend' : 'mouseleave';
-
-const syncElements = (thisElement, otherElement) => {
-	let thisElementScrollHandler = function(e) {
-		// console.log("Syncing...");
-		let current_position = this.scrollTop;
-		let amount_scrolled_by = current_position - this.previousScrollTop;
-		this.previousScrollTop = current_position;
-
-		let otherPreviousScrollTop = otherElement.scrollTop;
-		// otherElement.scrollBy(0, amount_scrolled_by);
-		otherElement.scrollTop += amount_scrolled_by;
-		const other_scrolled_by = otherElement.scrollTop - otherPreviousScrollTop;
-		if (amount_scrolled_by !== other_scrolled_by) {
-			console.log('Unequal scroll amounts!');
-			console.log(`This scrolled by ${amount_scrolled_by}, other scrolled by ${otherElement.scrollTop - otherPreviousScrollTop}`);
-			const difference = amount_scrolled_by - other_scrolled_by;
-			otherElement.scrollTop += difference;
-		}
-		
-		
-	};
-
-	const turnOnSync = function(e) {
-		console.log("Sync'd!");
-		this.previousScrollTop = this.scrollTop;
-		this.addEventListener('scroll', thisElementScrollHandler);
-	};
-	const turnOffSync = function(e) {
-		console.log("Unsync'd!");
-		this.previousScrollTop = this.scrollTop;
-		this.removeEventListener('scroll', thisElementScrollHandler);
-	};
-	thisElement.addEventListener(hover_on_event, turnOnSync);
-	thisElement.addEventListener(hover_off_event, turnOffSync);
-	
-	// return turnOffSync.bind(thisElement);
-};
-
-syncElements(keytruda_scrollable, lenvima_scrollable);
-syncElements(lenvima_scrollable, keytruda_scrollable);
-
+let sticky = document.querySelector('.sticky');
+let testScroll = new Impulsion({
+  source: sticky,
+  onUpdate(x, y, px, py) {
+    if (py == null) {
+      keytruda_scrollable.scrollBy(0, -y);
+      lenvima_scrollable.scrollBy(0, -y);
+    } else {
+      let dy = y - py;
+      keytruda_scrollable.scrollBy(0, -dy);
+      lenvima_scrollable.scrollBy(0, -dy);
+    }
+  },
+  // Reset values back to 0 when we are done scrolling
+  onEndDecelerating() {
+    testScroll.setValues(0, 0, null, null);
+  },
+});
