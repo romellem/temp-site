@@ -1,5 +1,7 @@
 
-
+#tick {
+	font-size: 2em;
+}
 // Misc styles
 
 button {
@@ -24,7 +26,7 @@ button {
     content: attr(data-ssi);
     // content: "hi";
     // content: attr(data-height);
-    display: block;
+    display: none;
     position: absolute;
     top: 0;
     left: 5px;
@@ -32,6 +34,10 @@ button {
     font-size: 10px;
     font-weight: normal;
     line-height: 14px;
+		
+		.show-breakpoints & {
+			display: block;
+		}
   }
 }
 $header-height: 70px;
@@ -104,6 +110,10 @@ ul {
     padding-left: 1em;
     margin-bottom: 4px;
   }
+	p {
+		display: block;
+		padding-left: 1em;
+	}
 
   li + li {
     margin-top: 4px;
