@@ -5,6 +5,10 @@ let button = document.getElementById('tick');
 let keytruda_ssi = 1;
 let lenvima_ssi = 1;
 
+document.getElementById('toggle-breakpoints').addEventListener('click', e => {
+	document.body.classList.toggle('show-breakpoints');
+});
+
 let keytruda_breakpoints = document.querySelectorAll('.keytruda [data-ssi]');
 let lenvima_breakpoints = document.querySelectorAll('.lenvima [data-ssi]');
 let max_keytruda_ssi = [...keytruda_breakpoints].reduce((acc, li) => parseInt(li.getAttribute('data-ssi'), 10), 0);
