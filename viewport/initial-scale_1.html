@@ -74,7 +74,12 @@
                 '<pre>' + viewport_json_str + '</pre><br>' + 'Count: ' + (++counter);
         }
 
-        setInterval(setContentHtml, 1000);
+        try {
+            setContentHtml();
+            setInterval(setContentHtml, 1000);
+        } catch (e) {
+            document.getElementById('content').innerHTML = '<p>Error getting "window.visualViewport"</p><p>' + e.toString() + '</p>';
+        }
     </script>
 </body>
 </html>
