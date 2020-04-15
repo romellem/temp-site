@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=980, initial-scale=1.0">
+    <title>Viewport Test</title>
+</head>
+<body>
+    <p id="content"></p>
+    <img src="https://via.placeholder.com/25"><br>
+    <img src="https://via.placeholder.com/50"><br>
+    <img src="https://via.placeholder.com/75"><br>
+    <img src="https://via.placeholder.com/100"><br>
+    <img src="https://via.placeholder.com/125"><br>
+    <img src="https://via.placeholder.com/150"><br>
+    <img src="https://via.placeholder.com/175"><br>
+    <img src="https://via.placeholder.com/200"><br>
+    <img src="https://via.placeholder.com/225"><br>
+    <img src="https://via.placeholder.com/250"><br>
+    <img src="https://via.placeholder.com/275"><br>
+    <img src="https://via.placeholder.com/300"><br>
+    <img src="https://via.placeholder.com/325"><br>
+    <img src="https://via.placeholder.com/350"><br>
+    <img src="https://via.placeholder.com/375"><br>
+    <img src="https://via.placeholder.com/400"><br>
+    <img src="https://via.placeholder.com/425"><br>
+    <img src="https://via.placeholder.com/450"><br>
+    <img src="https://via.placeholder.com/475"><br>
+    <img src="https://via.placeholder.com/500"><br>
+    <img src="https://via.placeholder.com/525"><br>
+    <img src="https://via.placeholder.com/550"><br>
+    <img src="https://via.placeholder.com/575"><br>
+    <img src="https://via.placeholder.com/600"><br>
+    <img src="https://via.placeholder.com/625"><br>
+    <img src="https://via.placeholder.com/650"><br>
+    <img src="https://via.placeholder.com/675"><br>
+    <img src="https://via.placeholder.com/700"><br>
+    <script>
+        var counter = 0;
+        function setContentHtml() {
+            var content_attribute = document.querySelector('meta[name="viewport"]').getAttribute('content');
+            var viewport_json_str = JSON.stringify({
+                offsetLeft: window.visualViewport.offsetLeft,
+                offsetTop: window.visualViewport.offsetTop,
+                pageLeft: window.visualViewport.pageLeft,
+                pageTop: window.visualViewport.pageTop,
+                width: window.visualViewport.width,
+                height: window.visualViewport.height,
+                scale: window.visualViewport.scale 
+            }, null, '  ');
+
+            var ele = document.getElementById('content');
+            ele.innerHTML = '<i>content=' + content_attribute + '</i><br>' +
+                '<pre>' + viewport_json_str + '</pre><br>' + 'Count: ' + (++counter);
+        }
+
+        setInterval(setContentHtml, 1000);
+    </script>
+</body>
+</html>

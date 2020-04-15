@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client-side redirect for Viewport pages</title>
+</head>
+<body>
+    <main></main>
+    <script>
+        // Bad query param checker, assumes `?page=` is only param present
+        var page_index = window.location.href.indexOf('?page=');
+        var page_param = window.location.href.substring(page_index + '?page='.length);
+        var pages = [
+            'width_device-width',
+            'initial-scale_1',
+            'width_device-width_initial-scale_1',
+            'width_320_initial-scale_1',
+            'width_320',
+            'width_980_initial-scale_1',
+            'width_980'
+        ];
+
+        // If we passed a valid `?page` param, redirect to that page
+        if (page_index > -1 && pages.indexOf(page_param) > -1) {
+            var url = '/viewport/' + page_param + '.html';
+            console.log('Redirecting to');
+            console.log(url);
+            window.location.href = url;
+        } else {
+            var main = document.querySelector('main');
+            main.innerHTML = '<p>Navigate to one of the following pages:</p>' + 
+                '<ul><li>' + pages.map(function(p) {
+                    return '<a href="?page=' + p + '">?page=' + p + '</a>';
+                }).join('</li><li>') + '</li></ul>';
+        }
+    </script>
+</body>
+</html>
