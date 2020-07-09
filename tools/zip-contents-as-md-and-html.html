@@ -66,7 +66,7 @@
 			let parsed_lines = input
 				.split('\n')
 				.filter(line => !line.includes('(stored 0%)'))
-				.map(line => line.replace(/^\s*adding: build\//, '').replace(/ \(deflated \d+%\)$/, ''));
+				.map(line => line.replace(/^\s*adding: build[\w\-]*\//, '').replace(/ \(deflated \d+%\)$/, ''));
 			
 			parsed_lines.sort();
 
