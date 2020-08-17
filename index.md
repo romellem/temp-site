@@ -4,7 +4,9 @@
 
 # Table of Contents
 *  [all/event-attachment-methods.html](all/event-attachment-methods.html)
-*  [embla-carousel/pastel-test.html](embla-carousel/pastel-test.html)
+*  [embla-carousel/](embla-carousel/)
+    *  [embla-carousel/works.html](embla-carousel/works.html)
+    *  [embla-carousel/fails.html](embla-carousel/fails.html)
 *  [ie/mouseover-within-button.html](ie/mouseover-within-button.html)
 *  [test/scroll-sync.html](test/scroll-sync.html)
 *  [tools/zip-contents-as-md-and-html.html](tools/zip-contents-as-md-and-html.html)
