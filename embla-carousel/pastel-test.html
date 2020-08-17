@@ -43,7 +43,9 @@
         <div class="embla__slide">Slide 3</div>
       </div>
     </div>
-    <script src="https://unpkg.com/embla-carousel@latest/embla-carousel.umd.js">
+    <!-- <script src="https://unpkg.com/embla-carousel@latest/embla-carousel.umd.js"> -->
+    <!-- Uses custom-build to check if the `requestAnimationFrame.bind(window)` lines are causing errors in Pastel -->
+    <script src="embla-carousel.umd.js"></script>
     </script>
     <script>
       var emblaNode = document.getElementById("embla");
