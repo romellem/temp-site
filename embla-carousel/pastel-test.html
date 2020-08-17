@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Embla Carousel iframe/pastel error testing</title>
     <style>
+      /* Required styles */
       .embla {
         overflow: hidden;
       }
@@ -15,9 +16,26 @@
         position: relative;
         min-width: 100%;
       }
+      
+      /* Misc styles */
+      .embla {
+        border: 1px solid black;
+        cursor: pointer;
+      }
+      
+      .embla__slide {
+        padding: 1em;
+      }
+      .embla__slide:nth-child(even) {
+        background: lightyellow;
+      }
+      .embla__slide:nth-child(odd) {
+        background: lightcyan;
+      }
     </style>
   </head>
   <body>
+    <h1>Swipe / Click and Drag slides below</h1>
     <div class="embla" id="embla">
       <div class="embla__container">
         <div class="embla__slide">Slide 1</div>
