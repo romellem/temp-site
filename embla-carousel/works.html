@@ -32,6 +32,14 @@
       .embla__slide:nth-child(odd) {
         background: lightcyan;
       }
+      
+      pre > code {
+        padding: 4px;
+        background-color: #fdfdfd;
+      }
+      code.error {
+        color: darkred;
+      }
     </style>
   </head>
   <body>
@@ -46,11 +54,16 @@
       Specifically, the error can be triggered by:
     </p>
     <ol>
-      <li>Load up (insert URL here).</li>
-      <li>Swipe a slide to see the library working.</li>
+      <li>Navigate to <a href="fails.html">fails.html</a>.</li>
+      <li>Swipe a slide. This <em>should</em> be working after an initial page load.</li>
       <li>Resize your browser / trigger a <code>resize</code> event.</li>
-      <li>Try to swipe a slide and observe that it is not working.</li>
-      <li>An error should also be visible in the console:<br><pre><code>Insert error here</code></pre></li>
+      <li>Try to swipe a slide and observe that it is now <b>not</b> working.</li>
+      <li>An error should also be visible in the console:<br><pre><code class="error">Uncaught TypeError: Illegal invocation
+  at i (embla-carousel.umd.js:formatted:917)
+  at Object.start (embla-carousel.umd.js:formatted:913)
+  at u (embla-carousel.umd.js:formatted:964)
+  at Object.distance (embla-carousel.umd.js:formatted:972)
+  at HTMLDocument.k (embla-carousel.umd.js:formatted:338)</code></pre></li>
     </ol>
     <p>
       This page <em>does</em> work since it uses a custom build of
