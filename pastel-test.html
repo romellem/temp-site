@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <style>
+      .embla {
+        overflow: hidden;
+      }
+      .embla__container {
+        display: flex;
+      }
+      .embla__slide {
+        position: relative;
+        min-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="embla" id="embla">
+      <div class="embla__container">
+        <div class="embla__slide">Slide 1</div>
+        <div class="embla__slide">Slide 2</div>
+        <div class="embla__slide">Slide 3</div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/embla-carousel@latest/embla-carousel.umd.js">
+    </script>
+    <script>
+      var emblaNode = document.getElementById("embla");
+      var embla = EmblaCarousel(emblaNode);
+    </script>
+  </body>
+</html>
