@@ -32,6 +32,14 @@
       .embla__slide:nth-child(odd) {
         background: lightcyan;
       }
+      
+      pre > code {
+        padding: 4px;
+        background-color: #fdfdfd;
+      }
+      code.error {
+        color: darkred;
+      }
     </style>
   </head>
   <body>
@@ -41,20 +49,49 @@
       with a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy" target="_blank" rel="noopener noreferrer"><code>Proxy</code></a>.
       This somehow is causing <code>`requestAnimationFrame.bind(window)`</code> and <code>`cancelAnimationFrame.bind(window)`</code> lines to not
       work correctly.
+      <blockquote>
+        <details>
+          <summary>View the code additions Pastel makes to the <code>window</code> object (among others)</summary>
+          <pre><code>function $PastelGetVariable(name) {
+    const root = typeof window === 'undefined' ? self : window;
+    // ...Removed lines to target: document, location, top, parent, frames, opener, & self
+    if (name === 'window') {
+        return root._PastelWindow || (typeof window !== 'undefined' ? window : undefined);
+    } else {
+        return root[name];
+    }
+}
+
+{
+    let document = $PastelGetVariable('document');
+    let location = $PastelGetVariable('location');
+    let top = $PastelGetVariable('top');
+    let parent = $PastelGetVariable('parent');
+    let frames = $PastelGetVariable('frames');
+    let opener = $PastelGetVariable('opener');
+    let self = $PastelGetVariable('self');
+    let window = $PastelGetVariable('window'); // 👈
+
+    // Original source code inserted here
+}</code></pre>
+        </details>
+      </blockquote>
     </p>
     <p>
       Specifically, the error can be triggered by:
     </p>
     <ol>
-      <li>Swipe a slide to see the library working.</li>
-      <li>Resize your browser / trigger a <code>resize</code> event.</li>
-      <li>Try to swipe a slide and observe that it is not working.</li>
-      <li>An error should also be visible in the console:<br><pre><code>Insert error here</code></pre></li>
+      <li>Swipe a slide. This <em>should</em> be working after an initial page load, although it may not.</li>
+      <li>Resize your browser / trigger a <code>resize</code> event. This <em>definitely</em> is enough to trigger the bug.</li>
+      <li>Try to swipe a slide and observe that it is <b>not</b> working.</li>
+      <li>An error should also be visible in the console:<br><pre><code class="error">Uncaught TypeError: Illegal invocation
+  at i (embla-carousel.umd.js:formatted:917)
+  at Object.start (embla-carousel.umd.js:formatted:913)
+  at u (embla-carousel.umd.js:formatted:964)
+  at Object.distance (embla-carousel.umd.js:formatted:972)
+  at HTMLDocument.k (embla-carousel.umd.js:formatted:338)</code></pre></li>
     </ol>
-    <p>
-      This page <em>does</em> work since it uses a custom build of
-      <a href="https://github.com/davidcetinkaya/embla-carousel" target="_blank" rel="noopener noreferrer">Embla Carousel</a>.
-    </p>
+    <hr>
     <div class="embla" id="embla">
       <div class="embla__container">
         <div class="embla__slide">Slide 1</div>
