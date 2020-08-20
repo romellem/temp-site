@@ -6,6 +6,7 @@
 *  [all/event-attachment-methods.html](all/event-attachment-methods.html)
 *  [embla-carousel/](embla-carousel/)
     *  [embla-carousel/works.html](embla-carousel/works.html)
+    *  [embla-carousel/works-published.html](embla-carousel/works-published.html)
     *  [embla-carousel/fails.html](embla-carousel/fails.html)
 *  [ie/mouseover-within-button.html](ie/mouseover-within-button.html)
 *  [test/scroll-sync.html](test/scroll-sync.html)
