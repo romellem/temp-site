@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embla Carousel iframe/pastel error testing</title>
+    <style>
+      /* Required styles */
+      .embla {
+        overflow: hidden;
+      }
+      .embla__container {
+        display: flex;
+      }
+      .embla__slide {
+        position: relative;
+        min-width: 100%;
+      }
+      
+      /* Misc styles */
+      .embla {
+        border: 1px solid black;
+        cursor: pointer;
+      }
+      
+      .embla__slide {
+        padding: 1em;
+      }
+      .embla__slide:nth-child(even) {
+        background: lightyellow;
+      }
+      .embla__slide:nth-child(odd) {
+        background: lightcyan;
+      }
+      
+      summary {
+        cursor: pointer;
+      }
+      pre {
+        padding: 4px;
+        background-color: #fafafa;
+      }
+      code.error {
+        color: darkred;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Back to <a href="/temp-site/embla-carousel/">Table of Contents</a>.</p>
+    <h1>Embla Carousel Pastel Error</h1>
+    <p>
+      In <a href="https://usepastel.com/" target="_blank" rel="noopener noreferrer">Pastel</a>, the <code>window</code> global is overwritten
+      with a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy" target="_blank" rel="noopener noreferrer"><code>Proxy</code></a>.
+      This somehow is causing <code>`requestAnimationFrame.bind(window)`</code> and <code>`cancelAnimationFrame.bind(window)`</code> lines to not
+      work correctly.
+      <blockquote>
+        <details>
+          <summary>View the code additions Pastel makes to the <code>window</code> object (among others)</summary>
+          <pre><code>function $PastelGetVariable(name) {
+    const root = typeof window === 'undefined' ? self : window;
+    // ...Removed lines to target: document, location, top, parent, frames, opener, & self
+    if (name === 'window') {
+        return root._PastelWindow || (typeof window !== 'undefined' ? window : undefined);
+    } else {
+        return root[name];
+    }
+}
+
+{
+    let document = $PastelGetVariable('document');
+    let location = $PastelGetVariable('location');
+    let top = $PastelGetVariable('top');
+    let parent = $PastelGetVariable('parent');
+    let frames = $PastelGetVariable('frames');
+    let opener = $PastelGetVariable('opener');
+    let self = $PastelGetVariable('self');
+    let window = $PastelGetVariable('window'); // 👈
+
+    // Original source code would be inserted here...
+}</code></pre>
+        </details>
+      </blockquote>
+    </p>
+    <p>
+      Specifically, the error can be triggered by:
+    </p>
+    <ol>
+      <li>Navigate to <a href="fails.html">fails.html</a>.</li>
+      <li>Swipe a slide. This <em>should</em> be working after an initial page load.</li>
+      <li>Resize your browser / trigger a <code>resize</code> event.</li>
+      <li>Try to swipe a slide and observe that it is now <b>not</b> working.</li>
+      <li>An error should also be visible in the console:<br><pre><code class="error">Uncaught TypeError: Illegal invocation
+  at i (embla-carousel.umd.js:formatted:917)
+  at Object.start (embla-carousel.umd.js:formatted:913)
+  at u (embla-carousel.umd.js:formatted:964)
+  at Object.distance (embla-carousel.umd.js:formatted:972)
+  at HTMLDocument.k (embla-carousel.umd.js:formatted:338)</code></pre></li>
+    </ol>
+    <p>
+      This page <em>does</em> work since it uses the newly released
+      <a href="https://github.com/davidcetinkaya/embla-carousel/releases/tag/v3.0.27" target="_blank" rel="noopener noreferrer"><code>v3.0.27</code></a>,
+      which contains a fix.
+    </p>
+    <p>
+      See <a href="https://github.com/davidcetinkaya/embla-carousel/pull/85" target="_blank" rel="noopener noreferrer">github.com/davidcetinkaya/embla-carousel/pull/85</a>
+      for more info.
+    </p>
+    <hr>
+    <div class="embla" id="embla">
+      <div class="embla__container">
+        <div class="embla__slide">Slide 1</div>
+        <div class="embla__slide">Slide 2</div>
+        <div class="embla__slide">Slide 3</div>
+      </div>
+    </div>
+    <!-- v3.0.27 fixes the issue! -->
+    <script src="https://unpkg.com/embla-carousel@^3.0.27/embla-carousel.umd.js"></script>
+    <script>
+      var emblaNode = document.getElementById("embla");
+      var embla = EmblaCarousel(emblaNode);
+    </script>
+  </body>
+</html>
