@@ -191,7 +191,7 @@
 			}
 
 			.list > li {
-				/* padding: 2rem 0; */
+				padding: 2rem 0;
 				flex: 0 0 33%;
 				text-align: center;
 				display: block;
@@ -209,14 +209,49 @@
 
 				background: rgba(0, 255, 255, 0.5);
 			}
+
+			.logo {
+				display: inline-block;
+				width: 100%;
+				max-width: 142px;
+				max-height: 30px;
+			}
+
+			.logo-title {
+				display: block;
+			}
 		</style>
 	</head>
 	<body>
 		<ul class="list">
-			<li><a href="https://example.com/">Lorem <br>ipsum <br>dolor <br>sit</a href="https://example.com/"></li>
-			<li><a href="https://example.com/">Amet <br>consectetur <br>adipisicing</a href="https://example.com/"></li>
-			<li><a href="https://example.com/">Ad <br>autem <br>ex <br>a <br>eum <br>explicabo</a href="https://example.com/"></li>
-			<li><a href="https://example.com/">Omnis <br>id <br>quibusdam <br>impedit <br>laborum <br>ipsam <br>molestiae</a href="https://example.com/"></li>
+			<li>
+				<a href="https://example.com/"
+					><img src="https://placehold.it/142x30" class="logo" /><span class="logo-title"
+						>Item 1</span
+					></a
+				>
+			</li>
+			<li>
+				<a href="https://example.com/"
+					><img src="https://placehold.it/150x30" class="logo" /><span class="logo-title"
+						>Item <br> 2<br> more lines</span
+					></a
+				>
+			</li>
+			<li>
+				<a href="https://example.com/"
+					><img src="https://placehold.it/160x50" class="logo" /><span class="logo-title"
+						>Item 3</span
+					></a
+				>
+			</li>
+			<li>
+				<a href="https://example.com/"
+					><img src="https://placehold.it/115x45" class="logo" /><span class="logo-title"
+						>Item 4</span
+					></a
+				>
+			</li>
 		</ul>
 	</body>
 </html>
