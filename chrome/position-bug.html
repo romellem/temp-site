@@ -200,7 +200,7 @@
 				border: 1px solid black;
 			}
 
-			.list > li > a {
+			.list > li > span {
 				position: relative;
 				top: 50%;
 				transform: translateY(-50%);
@@ -210,14 +210,7 @@
 				background: rgba(0, 255, 255, 0.5);
 			}
 
-			.logo {
-				display: inline-block;
-				width: 100%;
-				max-width: 142px;
-				max-height: 30px;
-			}
-
-			.logo-title {
+			.list > li > span > div {
 				display: block;
 			}
 		</style>
@@ -225,32 +218,16 @@
 	<body>
 		<ul class="list">
 			<li>
-				<a href="https://example.com/"
-					><img src="https://placehold.it/142x30" class="logo" /><span class="logo-title"
-						>Item 1</span
-					></a
-				>
+				<span><div>Item 1</div></span>
 			</li>
 			<li>
-				<a href="https://example.com/"
-					><img src="https://placehold.it/150x30" class="logo" /><span class="logo-title"
-						>Item <br> 2<br> more lines</span
-					></a
-				>
+				<span><div>Item <br>2<br>more lines</div></span>
 			</li>
 			<li>
-				<a href="https://example.com/"
-					><img src="https://placehold.it/160x50" class="logo" /><span class="logo-title"
-						>Item 3</span
-					></a
-				>
+				<span><div>Item 3</div></span>
 			</li>
 			<li>
-				<a href="https://example.com/"
-					><img src="https://placehold.it/115x45" class="logo" /><span class="logo-title"
-						>Item 4</span
-					></a
-				>
+				<span><div>Item 4</div></span>
 			</li>
 		</ul>
 	</body>
