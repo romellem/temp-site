@@ -6,64 +6,68 @@
 		<title>Document</title>
 		<style>
 			/* Misc styling, not related to bug */
+			html {
+				font-size: 16px;
+			}
+			* {
+				line-height: 16px;
+			}
 			ul {
 				list-style: none;
 			}
 			ul > li {
-				border: 1px solid black;
 				background: rgba(255, 0, 255, 0.5);
 				text-align: center;
 			}
 			ul > li > span {
 				background: rgba(0, 255, 255, 0.5);
-			}
-
-			li {
-				position: relative;
-			}
-
-			li::before,
-			li::after {
-				content: '';
-				width: 10px;
-				height: 1px;
-				position: absolute;
-				left: 0;
-			}
-			li::before {
-				background: red;
-				top: 30px;
-			}
-			li::after {
-				background: green;
-				bottom: 30px;
+				height: 20px;
+				display: inline-block;
 			}
 		</style>
 		<style>
 			ul {
+				/* Only appears on a flex container */
 				display: flex;
 			}
 
-			ul > li {
-				/* Some y padding is needed */
-				padding: 30px 0;
+			ul > li > span {
+				/* Move span to sit just outside of pink box */
+				position: relative;
+				top: 100%;
 			}
 
-			ul > li > span {
-				/* Move down 50% of parent's height, move up 50% of self height to vertically center */
-				position: relative;
-				top: 50%;
-				transform: translateY(-50%);
+			/* Bug occurrs when a flex-item has additional y-axis height, messing up child `top` positioning */
+			.border-top {
+				border-top-style: solid;
+				border-top-width: 7px;
+			}
 
-				display: block;
+			.border-bottom {
+				border-bottom-style: solid;
+				border-bottom-width: 7px;
+			}
+
+			.padding-top {
+				padding-top: 30px;
+			}
+
+			.padding-bottom {
+				padding-bottom: 30px;
 			}
 		</style>
 	</head>
 	<body>
 		<ul>
-			<li><span>Item 1</span></li>
-			<li><span>Item <br />2<br />more lines</span></li>
-			<li><span>Item <br>3</span></li>
+			<li><span>No Extra Y Height</span></li>
+			<li class="padding-top"><span>Padding Top</span></li>
+			<li class="padding-bottom"><span>Padding Bottom</span></li>
+			<li class="border-top"><span>Border Top</span></li>
+			<li class="border-bottom"><span>Border Bottom</span></li>
+			<li class="padding-top padding-bottom"><span>Padding Top + Padding Bottom</span></li>
+			<li class="padding-top border-top"><span>Padding Top + Border Top</span></li>
+			<li class="padding-top border-bottom"><span>Padding Top + Border Bottom</span></li>
+			<li class="padding-top padding-bottom border-top border-bottom"><span>All Padding + Border</span></li>
 		</ul>
 	</body>
 </html>
