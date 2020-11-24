@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fieldset max-height overflow bug</title>
   <style>
     fieldset {
@@ -14,8 +14,8 @@
       transition: max-height 1s;
       overflow: hidden;
 
-      /* Safe max-height for demo purposes */
-      max-height: 500px;
+      /* Safe assumed max-height for demo purposes */
+      max-height: 300px;
     }
 
     .collapsed {
@@ -31,7 +31,8 @@
     /* Misc styles for demo purposes, not related to the bug */
     body {
       max-width: 700px;
-      margin: 0.5em auto 0.5em 0.5em;
+      margin: 0.5em auto 0.5em 0;
+      padding: 0 0.5em;
     }
     blockquote {
       background: gainsboro;
@@ -61,117 +62,92 @@
 <body>
   <blockquote>
     <p>
-      The following <code>form</code> has conditional
-      <code>fieldset</code> elements depending on the selection
-      of the first question. After the first answer, the
-      relevant fieldset is then expanded to show the next
-      set of questions.
+      The following <code>form</code> has conditional <code>fieldset</code> elements
+      depending on the selection of the first question. After the first answer, the
+      relevant fieldset is then expanded to show the next set of questions.
     </p>
     <p>
-      To do this, it uses the <a href="https://css-tricks.com/using-css-transitions-auto-dimensions/">
-      <code>max-height</code> / CSS Transition trick</a>,
-      toggling between them as the selection changes.
+      To do this, it uses the
+      <a href="https://css-tricks.com/using-css-transitions-auto-dimensions/">
+        <code>max-height</code> / CSS Transition trick</a
+      >, toggling between them as the selection changes.
     </p>
     <p>
-      In Chrome 86, this previously worked as expected.
-      However, in Chrome 87, the content within each
-      <code>fieldset</code> now always overflows, despite
-      the <code>fieldset</code> having <kbd>max-height: 0</kbd>
+      In Chrome 86, this previously worked as expected. However, in Chrome 87, the content
+      within each
+      <code>fieldset</code> now always overflows, despite the <code>fieldset</code> having
+      <kbd>max-height: 0</kbd>
       set on it.
     </p>
     <p>
       The overflow issue can be addressed by setting
-      <code>height: 0</code> on the collapsed fieldset, but
-      this has the downside of removing our CSS transition
-      since we now are transitioning from a height of <code>0</code>
-      to <code>auto</code>.
+      <code>height: 0</code> on the collapsed fieldset, but this has the downside of
+      removing our CSS transition when collapsing since we now are changing from a height
+      of <code>auto</code> to <code>0</code>.
     </p>
   </blockquote>
 
-  <hr>
-    <label>
-      Toggle <em><code>height: 0</code></em> when a <code>fieldset</code>
-      is collapsed <input type="checkbox" id="height-toggle" checked/>
-    </label>
-  <hr>
+  <hr />
+  <label>
+    Add <em><code>height: 0</code></em> when a <code>fieldset</code> is collapsed
+    <input type="checkbox" id="height-toggle" />
+  </label>
+  <hr />
 
-  <form class="fix-fieldset-height">
-    <fieldset>  
-      <p>What is your favorite type of breakfast?</p>
-      <input type="radio" id="savory" value="savory" name="favorite-breakfast">
-      <label for="savory">Savory Breakfast</label><br/>
-  
-      <input type="radio" id="sweet" value="sweet" name="favorite-breakfast">
-      <label for="sweet">Sweet Breakfast</label><br/>
+  <form>
+    <fieldset>
+      <p>Have you heard of our product before?</p>
+      <input type="radio" id="yes" value="yes" name="heard-before" />
+      <label for="yes">Yes</label><br />
+
+      <input type="radio" id="no" value="no" name="heard-before" />
+      <label for="no">No</label><br />
     </fieldset>
 
-    <fieldset class="collapsed" data-toggle="savory">
-      <p>Choose your favorite savory breakfast</p>
-  
-      <input type="radio" id="eggs-and-bacon" value="eggs-and-bacon" name="savory-breakfast">
-      <label for="eggs-and-bacon">Eggs &amp; Bacon</label><br/>
-  
-      <input type="radio" id="skillets" value="skillets" name="savory-breakfast">
-      <label for="skillets">Skillets</label><br/>
+    <fieldset class="collapsed" data-toggle>
+      <p>Where did you hear about our product?</p>
 
-      <input type="radio" id="potato-pancakes" value="potato-pancakes" name="savory-breakfast">
-      <label for="potato-pancakes">Potato Pancakes</label><br/>
+      <input type="radio" id="blog" value="blog" name="heard-from" />
+      <label for="blog">Blog</label><br />
 
-      <input type="radio" id="biscuits-and-gravy" value="biscuits-and-gravy" name="savory-breakfast">
-      <label for="biscuits-and-gravy">Biscuits &amp; Gravy</label><br/>
+      <input type="radio" id="word-of-mouth" value="word-of-mouth" name="heard-from" />
+      <label for="word-of-mouth">Word of Mouth</label><br />
 
-      <input type="radio" id="grits" value="grits" name="savory-breakfast">
-      <label for="grits">Grits</label><br/>
+      <input type="radio" id="advertisement" value="advertisement" name="heard-from" />
+      <label for="advertisement">Advertisement</label><br />
     </fieldset>
-    <fieldset class="collapsed" data-toggle="sweet">
-      <p>Choose your favorite sweet breakfast</p>
-  
-      <input type="radio" id="pastries" value="pastries" name="sweet-breakfast">
-      <label for="pastries">Pastries</label><br/>
-  
-      <input type="radio" id="crepes" value="crepes" name="sweet-breakfast">
-      <label for="crepes">Crepes</label><br/>
 
-      <input type="radio" id="donuts" value="donuts" name="sweet-breakfast">
-      <label for="donuts">Donuts</label><br/>
+    <fieldset>
+      <p>How would you rate our product?</p>
+      <input type="radio" id="rating-1" value="rating-1" name="rating" />
+      <label for="rating-1">1 / 5</label><br />
 
-      <input type="radio" id="pancakes" value="pancakes" name="sweet-breakfast">
-      <label for="pancakes">Pancakes</label><br/>
+      <input type="radio" id="rating-2" value="rating-2" name="rating" />
+      <label for="rating-2">2 / 5</label><br />
 
-      <input type="radio" id="belgian-waffles" value="belgian-waffles" name="sweet-breakfast">
-      <label for="belgian-waffles">Belgian Waffles</label><br/>
-    </fieldset>
-    <fieldset>  
-      <p>What do you prefer to drink with breakfast?</p>
-      <input type="radio" id="water" value="water" name="breakfast-drink">
-      <label for="water">Water</label><br/>
-  
-      <input type="radio" id="juice" value="juice" name="breakfast-drink">
-      <label for="juice">Juice</label><br/>
+      <input type="radio" id="rating-3" value="rating-3" name="rating" />
+      <label for="rating-3">3 / 5</label><br />
 
-      <input type="radio" id="coffee" value="coffee" name="breakfast-drink">
-      <label for="coffee">Coffee</label><br/>
+      <input type="radio" id="rating-4" value="rating-4" name="rating" />
+      <label for="rating-4">4 / 5</label><br />
 
-      <input type="radio" id="milk" value="milk" name="breakfast-drink">
-      <label for="milk">Milk</label><br/>
+      <input type="radio" id="rating-5" value="rating-5" name="rating" />
+      <label for="rating-5">5 / 5</label><br />
     </fieldset>
   </form>
   <script>
     var form = document.querySelector('form');
-    var toggles = document.querySelectorAll('[name="favorite-breakfast"]');
-    var savory_fieldset = document.querySelector('[data-toggle="savory"]');
-    var sweet_fieldset = document.querySelector('[data-toggle="sweet"]');
+    var toggles = document.querySelectorAll('[name="heard-before"]');
+    var fieldset = document.querySelector('[data-toggle');
     var height_toggle = document.querySelector('#height-toggle');
 
     for (var i = 0; i < toggles.length; i++) {
       var toggle = toggles[i];
       toggle.onchange = function onChange(e) {
-        if (this.value === 'sweet') {
-          sweet_fieldset.classList.remove('collapsed');
-          savory_fieldset.classList.add('collapsed');
+        if (this.value === 'yes') {
+          fieldset.classList.remove('collapsed');
         } else {
-          savory_fieldset.classList.remove('collapsed');
-          sweet_fieldset.classList.add('collapsed');
+          fieldset.classList.add('collapsed');
         }
       };
     }
