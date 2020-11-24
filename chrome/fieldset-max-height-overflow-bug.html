@@ -40,10 +40,12 @@
       padding: 0.5em;
     }
 
-    blockquote > :first-child {
+    blockquote > :first-child,
+    section > :first-child {
       margin-top: 0;
     }
-    blockquote > :last-child {
+    blockquote > :last-child,
+    section > :last-child {
       margin-bottom: 0;
     }
 
@@ -56,6 +58,22 @@
       font-style: normal;
       display: inline-block;
       padding: 1px 3px;
+    }
+
+    figure {
+      padding: 0.5em;
+      margin-top: 1em;
+      border: 2px solid black;
+      border-radius: 4px;
+    }
+
+    section {
+      padding: 0.5em;
+      background: lightgoldenrodyellow;
+    }
+
+    video {
+      max-width: 100%;
     }
   </style>
 </head>
@@ -135,6 +153,37 @@
       <label for="rating-5">5 / 5</label><br />
     </fieldset>
   </form>
+
+  <hr>
+
+  <section>
+    <p><strong>Videos showing previous / current behaviour</strong></p>
+    <figure>
+      <video controls muted>
+        <source src="fieldset-max-height-overflow-bug-videos/chrome-87.0.4280.66.mp4" type="video/mp4">
+      </video>
+      <figcaption>Chrome v87 - macOS 10.14.6</figcaption>
+    </figure>
+    <figure>
+      <video controls muted>
+        <source src="fieldset-max-height-overflow-bug-videos/chrome-86.mp4" type="video/mp4">
+      </video>
+      <figcaption>Chrome v86 - macOS 10.14.6</figcaption>
+    </figure>
+    <figure>
+      <video controls muted>
+        <source src="fieldset-max-height-overflow-bug-videos/firefox-de-v84.0b2.mp4" type="video/mp4">
+      </video>
+      <figcaption>FireFox v84 - macOS 10.14.6</figcaption>
+    </figure>
+    <figure>
+      <video controls muted>
+        <source src="fieldset-max-height-overflow-bug-videos/safari-14.0.mp4" type="video/mp4">
+      </video>
+      <figcaption>Safari v14.0 - macOS 10.14.6</figcaption>
+    </figure>
+  </section>
+
   <script>
     var form = document.querySelector('form');
     var toggles = document.querySelectorAll('[name="heard-before"]');
