@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>fieldset max-height overflow bug</title>
+  <style>
+    fieldset {
+      border: 0;
+      padding: 0;
+      margin: 0;
+      min-width: 0;
+
+      transition: max-height 1s;
+      overflow: hidden;
+
+      /* Safe max-height for demo purposes */
+      max-height: 500px;
+    }
+
+    .collapsed {
+      max-height: 0;
+    }
+
+    .fix-fieldset-height .collapsed {
+      height: 0;
+    }
+  </style>
+
+  <style>
+    /* Misc styles for demo purposes, not related to the bug */
+    body {
+      max-width: 700px;
+      margin: 0.5em auto 0.5em 0.5em;
+    }
+    blockquote {
+      background: gainsboro;
+      margin: 1em 0;
+      padding: 0.5em;
+    }
+
+    blockquote > :first-child {
+      margin-top: 0;
+    }
+    blockquote > :last-child {
+      margin-bottom: 0;
+    }
+
+    fieldset p:first-of-type {
+      font-style: italic;
+    }
+
+    em code {
+      background: lavender;
+      font-style: normal;
+      display: inline-block;
+      padding: 1px 3px;
+    }
+  </style>
+</head>
+<body>
+  <blockquote>
+    <p>
+      The following <code>form</code> has conditional
+      <code>fieldset</code> elements depending on the selection
+      of the first question. After the first answer, the
+      relevant fieldset is then expanded to show the next
+      set of questions.
+    </p>
+    <p>
+      To do this, it uses the <a href="https://css-tricks.com/using-css-transitions-auto-dimensions/">
+      <code>max-height</code> / CSS Transition trick</a>,
+      toggling between them as the selection changes.
+    </p>
+    <p>
+      In Chrome 86, this previously worked as expected.
+      However, in Chrome 87, the content within each
+      <code>fieldset</code> now always overflows, despite
+      the <code>fieldset</code> having <kbd>max-height: 0</kbd>
+      set on it.
+    </p>
+    <p>
+      The overflow issue can be addressed by setting
+      <code>height: 0</code> on the collapsed fieldset, but
+      this has the downside of removing our CSS transition
+      since we now are transitioning from a height of <code>0</code>
+      to <code>auto</code>.
+    </p>
+  </blockquote>
+
+  <hr>
+    <label>
+      Toggle <em><code>height: 0</code></em> when a <code>fieldset</code>
+      is collapsed <input type="checkbox" id="height-toggle" checked/>
+    </label>
+  <hr>
+
+  <form class="fix-fieldset-height">
+    <fieldset>  
+      <p>What is your favorite type of breakfast?</p>
+      <input type="radio" id="savory" value="savory" name="favorite-breakfast">
+      <label for="savory">Savory Breakfast</label><br/>
+  
+      <input type="radio" id="sweet" value="sweet" name="favorite-breakfast">
+      <label for="sweet">Sweet Breakfast</label><br/>
+    </fieldset>
+
+    <fieldset class="collapsed" data-toggle="savory">
+      <p>Choose your favorite savory breakfast</p>
+  
+      <input type="radio" id="eggs-and-bacon" value="eggs-and-bacon" name="savory-breakfast">
+      <label for="eggs-and-bacon">Eggs &amp; Bacon</label><br/>
+  
+      <input type="radio" id="skillets" value="skillets" name="savory-breakfast">
+      <label for="skillets">Skillets</label><br/>
+
+      <input type="radio" id="potato-pancakes" value="potato-pancakes" name="savory-breakfast">
+      <label for="potato-pancakes">Potato Pancakes</label><br/>
+
+      <input type="radio" id="biscuits-and-gravy" value="biscuits-and-gravy" name="savory-breakfast">
+      <label for="biscuits-and-gravy">Biscuits &amp; Gravy</label><br/>
+
+      <input type="radio" id="grits" value="grits" name="savory-breakfast">
+      <label for="grits">Grits</label><br/>
+    </fieldset>
+    <fieldset class="collapsed" data-toggle="sweet">
+      <p>Choose your favorite sweet breakfast</p>
+  
+      <input type="radio" id="pastries" value="pastries" name="sweet-breakfast">
+      <label for="pastries">Pastries</label><br/>
+  
+      <input type="radio" id="crepes" value="crepes" name="sweet-breakfast">
+      <label for="crepes">Crepes</label><br/>
+
+      <input type="radio" id="donuts" value="donuts" name="sweet-breakfast">
+      <label for="donuts">Donuts</label><br/>
+
+      <input type="radio" id="pancakes" value="pancakes" name="sweet-breakfast">
+      <label for="pancakes">Pancakes</label><br/>
+
+      <input type="radio" id="belgian-waffles" value="belgian-waffles" name="sweet-breakfast">
+      <label for="belgian-waffles">Belgian Waffles</label><br/>
+    </fieldset>
+    <fieldset>  
+      <p>What do you prefer to drink with breakfast?</p>
+      <input type="radio" id="water" value="water" name="breakfast-drink">
+      <label for="water">Water</label><br/>
+  
+      <input type="radio" id="juice" value="juice" name="breakfast-drink">
+      <label for="juice">Juice</label><br/>
+
+      <input type="radio" id="coffee" value="coffee" name="breakfast-drink">
+      <label for="coffee">Coffee</label><br/>
+
+      <input type="radio" id="milk" value="milk" name="breakfast-drink">
+      <label for="milk">Milk</label><br/>
+    </fieldset>
+  </form>
+  <script>
+    var form = document.querySelector('form');
+    var toggles = document.querySelectorAll('[name="favorite-breakfast"]');
+    var savory_fieldset = document.querySelector('[data-toggle="savory"]');
+    var sweet_fieldset = document.querySelector('[data-toggle="sweet"]');
+    var height_toggle = document.querySelector('#height-toggle');
+
+    for (var i = 0; i < toggles.length; i++) {
+      var toggle = toggles[i];
+      toggle.onchange = function onChange(e) {
+        if (this.value === 'sweet') {
+          sweet_fieldset.classList.remove('collapsed');
+          savory_fieldset.classList.add('collapsed');
+        } else {
+          savory_fieldset.classList.remove('collapsed');
+          sweet_fieldset.classList.add('collapsed');
+        }
+      };
+    }
+
+    height_toggle.onchange = function onHeightToggleChange(e) {
+      if (this.checked) {
+        form.classList.add('fix-fieldset-height');
+      } else {
+        form.classList.remove('fix-fieldset-height');
+      }
+    };
+  </script>
+</body>
+</html>
