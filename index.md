@@ -5,6 +5,7 @@
 # Table of Contents
 *  [all/event-attachment-methods.html](all/event-attachment-methods.html)
 *  [chrome/position-bug.html ](chrome/position-bug.html )
+*  [chrome/fieldset-max-height-overflow-bug.html](chrome/fieldset-max-height-overflow-bug.html)
 *  [embla-carousel/](embla-carousel/)
     *  [embla-carousel/works.html](embla-carousel/works.html)
     *  [embla-carousel/works-published.html](embla-carousel/works-published.html)
