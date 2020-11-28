@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Calculate Sums</title>
+		<style>
+			html {
+				font-size: 20px;
+				line-height: 1.8;
+			}
+			input {
+				padding: 1px 2px;
+				min-width: 100px;
+				font-size: 22px;
+			}
+			ul {
+				line-height: 1.4;
+				margin-top: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<label>Sum: <input type="number" id="sum" min="3" max="45" /></label><br />
+		<label>Number of digits: <input type="number" id="digits" min="2" max="9" /></label><br />
+		<hr />
+		<div id="answers">Answers:</div>
+		<script
+			src="https://unpkg.com/generatorics@1.1.0/generatorics.js"
+			integrity="sha384-U6bkFl6HidZgItRJUw+XGyZ4fzRImmx9Ue20/XPHSGOMqt4utKI6PlLuFzt1DAb6"
+			crossorigin="anonymous"
+		></script>
+		<script>
+			/**
+			 * cache = {
+			 *   [sum]: {
+			 *     [digits]: possible_digits,
+			 *   },
+			 * }
+			 */
+			const cache = {};
+			const G = window.G;
+			const NUMS = Array(9)
+				.fill()
+				.map((_, i) => i + 1)
+				.reverse();
+			const sum_input = document.getElementById('sum');
+			const digits_input = document.getElementById('digits');
+			const answers = document.getElementById('answers');
+			const list = document.createElement('ul');
+			const add = (a, b) => a + b;
+
+			function calculateSums() {
+				let sum = parseInt(sum_input.value, 10);
+				let digits = parseInt(digits_input.value, 10);
+				if (window.isNaN(sum) || window.isNaN(digits)) {
+					return;
+				}
+
+				if (!cache[sum]) {
+					cache[sum] = {};
+				}
+				if (!cache[sum][digits]) {
+					// This is slow, but fast enough that it doesn't matter for our inputs
+					let possible_digits = [];
+					for (let perm of G.clone.combination(NUMS, digits)) {
+						let current_sum = perm.reduce(add, 0);
+						if (current_sum === sum) {
+							possible_digits.push(perm);
+						}
+					}
+					cache[sum][digits] = possible_digits;
+				}
+
+				return cache[sum][digits];
+			}
+			function displaySums(sums) {
+				if (!sums.length) {
+					return (list.innerHTML = '<li><em>N/A</em></li>');
+				}
+
+				let equation = sums.map((sum) => sum.join(' + '));
+				let html = `<li>${equation.join('</li><li>')}</li>`;
+				list.innerHTML = html;
+			}
+			function calculateAndDisplayAnswers() {
+				let sums = calculateSums();
+				if (sums) {
+					displaySums(sums);
+				}
+			}
+			for (let input of [sum_input, digits_input]) {
+				input.addEventListener('change', calculateAndDisplayAnswers);
+			}
+
+			answers.appendChild(list);
+		</script>
+	</body>
+</html>
