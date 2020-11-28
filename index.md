@@ -13,6 +13,7 @@
 *  [ie/mouseover-within-button.html](ie/mouseover-within-button.html)
 *  [test/scroll-sync.html](test/scroll-sync.html)
 *  [tools/zip-contents-as-md-and-html.html](tools/zip-contents-as-md-and-html.html)
+*  [tools/calc-sums.html](tools/calc-sums.html)
 *  [viewport/](viewport/)
     *  [viewport/initial-scale_1.html](viewport/initial-scale_1.html)
     *  [viewport/width_320.html](viewport/width_320.html)
