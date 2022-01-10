@@ -29,6 +29,8 @@
 	<body>
 		<label>Sum: <input type="number" id="sum" min="3" max="45" /></label><br />
 		<label>Number of digits: <input type="number" id="digits" min="2" max="9" /></label><br />
+		<label>Repeats: <input type="number" id="repeats" min="0" max="4" value="0" /></label><br />
+
 		<hr />
 		<div id="answers">Answers:</div>
 		<script
@@ -39,19 +41,36 @@
 		<script>
 			/**
 			 * cache = {
-			 *   [sum]: {
+			 *   [sum + ',' + repeats]: {
 			 *     [digits]: possible_digits,
 			 *   },
 			 * }
 			 */
+			const sortDesc = (a, b) => b - a;
 			const cache = {};
 			const G = window.G;
 			const NUMS = Array(9)
 				.fill()
 				.map((_, i) => i + 1)
 				.reverse();
+			const NUMS_BY_REPEATS = [0, 1, 2, 3, 4].reduce((acc, repeats) => {
+				let arr = NUMS.slice(0);
+				for (let i = 0; i < repeats; i++) {
+					arr = arr.concat(NUMS);
+				}
+				arr.sort(sortDesc);
+				acc[repeats] = arr;
+				
+				return acc;
+			}, {});
 			const sum_input = document.getElementById('sum');
 			const digits_input = document.getElementById('digits');
+			const repeats_input = document.getElementById('repeats');
+			const all_inputs = [
+				sum_input,
+				digits_input,
+				repeats_input,
+			];
 			const answers = document.getElementById('answers');
 			const list = document.createElement('ul');
 			const add = (a, b) => a + b;
@@ -59,26 +78,35 @@
 			function calculateSums() {
 				let sum = parseInt(sum_input.value, 10);
 				let digits = parseInt(digits_input.value, 10);
-				if (window.isNaN(sum) || window.isNaN(digits)) {
+				let repeats = parseInt(repeats_input.value, 10);
+				if (window.isNaN(sum) || window.isNaN(digits) || window.isNaN(repeats)) {
+					return;
+				}
+				
+				const numbers_list = NUMS_BY_REPEATS[repeats];
+				if (!numbers_list) {
 					return;
 				}
 
-				if (!cache[sum]) {
-					cache[sum] = {};
+				const key = sum + ',' + repeats;
+				if (!cache[key]) {
+					cache[key] = {};
 				}
-				if (!cache[sum][digits]) {
+				if (!cache[key][digits]) {
+					// Since we allow repeats, only keep unique sums
+					let possible_digits = new Set();
 					// This is slow, but fast enough that it doesn't matter for our inputs
-					let possible_digits = [];
-					for (let perm of G.clone.combination(NUMS, digits)) {
+					for (let perm of G.combination(numbers_list, digits)) {
 						let current_sum = perm.reduce(add, 0);
 						if (current_sum === sum) {
-							possible_digits.push(perm);
+							// Store string versions of the sums, to be converted to arrays later
+							possible_digits.add(perm.join(','));
 						}
 					}
-					cache[sum][digits] = possible_digits;
+					cache[key][digits] = [...possible_digits].map(sum_str => sum_str.split(',').map(v => +v));
 				}
 
-				return cache[sum][digits];
+				return cache[key][digits];
 			}
 			function displaySums(sums) {
 				if (!sums.length) {
@@ -95,7 +123,7 @@
 					displaySums(sums);
 				}
 			}
-			for (let input of [sum_input, digits_input]) {
+			for (let input of all_inputs) {
 				input.addEventListener('change', calculateAndDisplayAnswers);
 			}
 
