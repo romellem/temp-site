@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safari JS Detection</title>
+    <title>Safari Detection</title>
   <style>
-      /* http://browserhacks.com/#hack-a13653e3599eb6e6c11ba7f1a859193e */
+      /* https://codepen.io/karlsson/pen/zYNYwNO */
       #is-safari { display: none }
       #is-not-safari { display: block }
-      @media \\0 screen {
+      @media not all and (min-resolution: 0.001dpcm) {
           #is-safari { display: block }
           #is-not-safari { display: none }
       }
-    html { font-size: 24px }
+
+      html { font-size: 24px }
   </style>
 </head>
 <body>
   <div id="is-safari">true</div>
   <div id="is-not-safari">false</div>
+  <!-- http://browserhacks.com/#sa did not work (js or css) --?
 </body>
 </html>
