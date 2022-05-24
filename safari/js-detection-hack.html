@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safari JS Detection</title>
+  <style>
+    html { font-size: 24px }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+      // http://browserhacks.com/#hack-8cbfaf04fe51ad543a597fbd2f249fa7
+      var isSafari = /constructor/i.test(window.HTMLElement);
+      var app = document.getElementById('app');
+      app.innerHTML = isSafari ? 'true' : 'false';
+  </script>
+</body>
+</html>
