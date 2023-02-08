@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>:has() Support check</title>
+  <style>
+    body {
+      background: yellow;
+    }
+    
+    body:has(p) {
+      background: white;
+    }
+    
+    b {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <p>If this page has a <code>white</code> background, it supports the <code>:has()</code> pseudo-selector. If it doesn't, the background will be <code>yellow</code>.</p>
+  <p>If <b>this text is <code>red</code></b>, then the CSS engine didn't crash after arriving at the <code>:has()</code> pseudo-selector.</p>
+</body>
+</html>
