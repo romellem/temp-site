@@ -13,14 +13,24 @@
     body:has(p) {
       background: white;
     }
-    
+      
+    div:has(i) b {
+      background: cyan;
+    }
+      
     b {
       color: red;
+    }
+    
+    div + div {
+      margin-top: 1em;
     }
   </style>
 </head>
 <body>
   <p>If this page has a <code>white</code> background, it supports the <code>:has()</code> pseudo-selector. If it doesn't, the background will be <code>yellow</code>.</p>
   <p>If <b>this text is <code>red</code></b>, then the CSS engine didn't crash after arriving at the <code>:has()</code> pseudo-selector.</p>
+  <div>This <b>bold text</b> will have a <code>cyan</code> background on browsers that support <i><code>:has</code></i>.</div>
+  <div>This <b>bold text</b> won't because there is no an <code>&lt;i&gt;</code> tag within the <code>div</code>.</div>
 </body>
 </html>
