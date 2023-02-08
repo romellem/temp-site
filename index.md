@@ -11,6 +11,7 @@
     *  [embla-carousel/works-published.html](embla-carousel/works-published.html)
     *  [embla-carousel/fails.html](embla-carousel/fails.html)
 *  [ie/mouseover-within-button.html](ie/mouseover-within-button.html)
+*  [safari/css-has-check.html](safari/css-has-check.html)
 *  [test/scroll-sync.html](test/scroll-sync.html)
 *  [tools/zip-contents-as-md-and-html.html](tools/zip-contents-as-md-and-html.html)
 *  [tools/calc-sums.html](tools/calc-sums.html)
