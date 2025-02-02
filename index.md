@@ -10,6 +10,7 @@
     *  [embla-carousel/works.html](embla-carousel/works.html)
     *  [embla-carousel/works-published.html](embla-carousel/works-published.html)
     *  [embla-carousel/fails.html](embla-carousel/fails.html)
+*  [emoji/](emoji/)
 *  [focus/](focus/)
 *  [ie/mouseover-within-button.html](ie/mouseover-within-button.html)
 *  [safari/css-has-check.html](safari/css-has-check.html)
