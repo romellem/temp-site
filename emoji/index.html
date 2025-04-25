@@ -6,22 +6,75 @@
 		<title>Emoji Test</title>
 	</head>
 	<body>
-		<ul>
-			<li>6.0: 😇 😍 😘</li>
-			<li>7.0: 🐿️ 🕊️ 🕷️</li>
-			<li>8.0: 🙃 🤑 🤗</li>
-			<li>9.0: 🤣 🤥 🤤</li>
-			<li>10.0: 🤩 🤪 🤭</li>
-			<li>11.0: 🥶 🥴 🥳</li>
-			<li>12.0: 🧄 🧈 🦦</li>
-			<li>13.0: 🦭 🪳 🫒</li>
-			<li>14.0: 🫠 🫣 🫡</li>
-			<li>15.0: 🫨 🫎 🫏</li>
-			<li>16.0: 🫩 🫆 🪾</li>
+		<ul id="emoji-list">
+			<li>6.0: <span>😇 😍 😘</span></li>
+			<li>7.0: <span>🐿️ 🕊️ 🕷️</span></li>
+			<li>8.0: <span>🙃 🤑 🤗</span></li>
+			<li>9.0: <span>🤣 🤥 🤤</span></li>
+			<li>10.0: <span>🤩 🤪 🤭</span></li>
+			<li>11.0: <span>🥶 🥴 🥳</span></li>
+			<li>12.0: <span>🧄 🧈 🦦</span></li>
+			<li>13.0: <span>🦭 🪳 🫒</span></li>
+			<li>14.0: <span>🫠 🫣 🫡</span></li>
+			<li>15.0: <span>🫨 🫎 🫏</span></li>
+			<li>16.0: <span>🫩 🫆 🪾</span></li>
 		</ul>
 		<script>
 			var userAgent = navigator && navigator.userAgent;
 			document.body.innerHTML += '<p>User Agent: ' + userAgent + '</p>';
+			
+			const FONT_FAMILY = `"Twemoji Mozilla","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji","EmojiOne Color","Android Emoji",sans-serif`;
+			function makeCtx() {
+				const canvas = document.createElement('canvas');
+				canvas.width = canvas.height = 1;
+				const ctx = canvas.getContext('2d', { willReadFrequently: true });
+				ctx.textBaseline = 'top';
+				ctx.font = `100px ${FONT_FAMILY}`;
+				ctx.scale(0.01, 0.01);
+				return ctx;
+			}
+			function getColor(ctx, text, color) {
+				// we're rendering to a 1px canvas so it'll be a character (or, hopefully, a
+				// color emoji) scaled down to a single vague brownish pixel
+				ctx.clearRect(0, 0, 100, 100);
+				ctx.fillStyle = color;
+				ctx.fillText(text, 0, 0);
+				const bytes = ctx.getImageData(0, 0, 1, 1).data;
+				return bytes.join(',');
+			}
+			/**
+			 * Detects whether the emoji in `char` is rendered as a color emoji by this
+			 * browser.
+			 *
+			 * Note: this is not complete for detecting support for any emoji. Notably, it
+			 * does not detect whether emojis that consist of two glyphs with a
+			 * zero-width-joiner are rendered as a single emoji or as two, because this is
+			 * not needed to detect country flag support.
+			 */
+			function isEmojiCharSupported(char) {
+				// Render `text` to a single pixel in white and in black, and then compare
+				// them to each other and ensure they're the same color, and neither one is
+				// black. This shows that the emoji was rendered in color, and the font color
+				// was disregarded.
+				const ctx = makeCtx();
+				const white = getColor(ctx, char, '#fff');
+				const black = getColor(ctx, char, '#000');
+				// This is RGBA, so for 0,0,0, we are checking that the first RGB is not all zeroes.
+				// Most of the time when unsupported this is 0,0,0,0, but on Chrome on Mac it is
+				// 0,0,0,61 - there is a transparency here.
+				return black === white && !black.startsWith('0,0,0,');
+			}
+			
+			const lis = document.querySelectorAll('ul > li');
+			const liSpans = document.querySelectorAll('ul > li > span');
+			const emojiSets = Array.from(liSpans).map((span) => span.textContent.split(/\s+/));
+			const newUl = document.createElement('ul');
+			const emojiSetsResults = emojiSets.map((emojis) =>
+				document.createTextNode(String(emojis.every((e) => isEmojiCharSupported(e))))
+			);
+
+			// Add 'true' or 'false' to each LI
+			lis.forEach((li, i) => li.appendChild(emojiSetsResults[i]));
 		</script>
 	</body>
 </html>
